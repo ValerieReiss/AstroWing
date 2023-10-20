@@ -75,7 +75,7 @@ class GarageScene: SKScene {
             addChild(farEmitter)
         }
         
-        let backgroundImage = SKSpriteNode(imageNamed: "bgGarage")
+        let backgroundImage = SKSpriteNode(imageNamed: "bgGarage2")
                 //backgroundImage.anchorPoint = CGPointMake(0.5, 0.5)
         backgroundImage.size = CGSize(width: self.frame.width, height: self.frame.height)
         backgroundImage.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
@@ -94,26 +94,26 @@ class GarageScene: SKScene {
         labelLaserExplained.setScale(2.5)
         labelLaserExplained.zPosition = 5
         labelLaserExplained.text = "Laser"
-        labelLaserExplained.position = CGPoint(x: self.frame.minX+200, y: self.frame.maxY - 250)
+        labelLaserExplained.position = CGPoint(x: self.frame.minX + 800, y: self.frame.maxY - 150)
         addChild(labelLaserExplained)
         
         labelColorExplained = SKLabelNode(fontNamed: "Chalkduster")
         labelColorExplained.setScale(2.5)
         labelColorExplained.zPosition = 5
         labelColorExplained.text = "Color 100$"
-        labelColorExplained.position = CGPoint(x: self.frame.maxX - 300, y: self.frame.minY + 300)
+        labelColorExplained.position = CGPoint(x: self.frame.maxX - 400, y: self.frame.maxY - 150)
         addChild(labelColorExplained)
         
         labelPowerExplained = SKLabelNode(fontNamed: "Chalkduster")
         labelPowerExplained.setScale(2.5)
         labelPowerExplained.zPosition = 5
-        labelPowerExplained.text = "PowerUp 50$"
-        labelPowerExplained.position = CGPoint(x: self.frame.midX + 600, y: self.frame.minY + 80)
+        labelPowerExplained.text = "PowerUp"
+        labelPowerExplained.position = CGPoint(x: self.frame.minX + 800, y: self.frame.maxY - 350)
         addChild(labelPowerExplained)
         
         // Change Colors
-        let buttonColor = SKShapeNode(rectOf: CGSize(width: 600, height: 200))
-        buttonColor.position = CGPoint(x: self.frame.maxX - 300, y: self.frame.minY + 300)
+        let buttonColor = SKShapeNode(rectOf: CGSize(width: 600, height: 150))
+        buttonColor.position = CGPoint(x: self.frame.maxX - 400, y: self.frame.maxY - 100)
         buttonColor.strokeColor = .init(white: 1.0, alpha: 0.5)
         buttonColor.fillColor = .init(white: 1.0, alpha: 0.3)
         buttonColor.name = "buttonColor"
@@ -123,7 +123,7 @@ class GarageScene: SKScene {
         let action = SKAction.setTexture(SKTexture(imageNamed: arrayFusil[playerFusil]), resize: true)
         self.player.run(action)
         
-        player.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        player.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 200)
         player.zPosition = 3
         player.name = "player"
         player.texture = SKTexture(imageNamed: arrayFusil[indexW])
@@ -131,7 +131,7 @@ class GarageScene: SKScene {
         player.physicsBody?.contactTestBitMask = ColliderType.knochen.rawValue | ColliderType.zange.rawValue
         player.physicsBody?.categoryBitMask  = ColliderType.player.rawValue
         player.physicsBody?.collisionBitMask = ColliderType.player.rawValue
-        player.setScale(3)
+        player.setScale(2)
         addChild(player)
         
         indexW = 3 //Int.random(in: 0..<10)
@@ -143,16 +143,16 @@ class GarageScene: SKScene {
         buttonFusil.texture = SKTexture(imageNamed: arrayFusil[indexW])
         buttonFusil.physicsBody = SKPhysicsBody(texture: buttonFusilW.texture!, size: buttonFusilW.texture!.size())
         buttonFusil.physicsBody?.isDynamic = false
-        buttonFusil.setScale(0.8)
+        buttonFusil.setScale(1.0)
         
         buttonFusilW.name = "buttonFusilW"
-        buttonFusilW.position = CGPoint(x: self.frame.maxX - 200, y: self.frame.maxY - 700)
+        buttonFusilW.position = CGPoint(x: self.frame.maxX - 600, y: self.frame.maxY - 400)
         buttonFusilW.zPosition = 2
         addChild(buttonFusilW)
         buttonFusilW.texture = SKTexture(imageNamed: arrayFusil[indexW])
         buttonFusilW.physicsBody = SKPhysicsBody(texture: buttonFusilW.texture!, size: buttonFusilW.texture!.size())
         buttonFusilW.physicsBody?.isDynamic = false
-        buttonFusilW.setScale(0.8)
+        buttonFusilW.setScale(1.0)
         
         /*let bigFusil = SKShapeNode(rectOf: CGSize(width: 600, height: 600))
         bigFusil.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
@@ -161,7 +161,7 @@ class GarageScene: SKScene {
         bigFusil.zPosition = 1
         addChild(bigFusil)*/
         
-        knochen.position = CGPoint(x: self.frame.midX + 600, y: self.frame.midY - 50 )
+        knochen.position = CGPoint(x: self.frame.midX + 600, y: self.frame.minY + 300 )
         knochen.name = "knochen"
         knochen.zPosition = 7
         knochen.texture = SKTexture(imageNamed: "garageKnochen")
@@ -174,10 +174,10 @@ class GarageScene: SKScene {
         knochen.physicsBody?.contactTestBitMask = ColliderType.player.rawValue | ColliderType.zange.rawValue
         knochen.physicsBody?.categoryBitMask  = ColliderType.knochen.rawValue
         knochen.physicsBody?.collisionBitMask = ColliderType.knochen.rawValue
-        knochen.setScale(0.9)
+        knochen.setScale(0.8)
         addChild(knochen)
         
-        zange.position = CGPoint(x: self.frame.midX - 600, y: self.frame.midY + 50 )
+        zange.position = CGPoint(x: self.frame.midX - 600, y: self.frame.minY + 300 )
         zange.name = "zange"
         zange.zPosition = 6
         zange.texture = SKTexture(imageNamed: "garageZange")
@@ -194,8 +194,8 @@ class GarageScene: SKScene {
         zange.setScale(0.7)
         addChild(zange)
         
-        let buttonPowerup = SKShapeNode(rectOf: CGSize(width: 700, height: 200), cornerRadius: 10.0)
-        buttonPowerup.position = CGPoint(x: self.frame.midX, y: self.frame.minY + 100 )
+        let buttonPowerup = SKShapeNode(rectOf: CGSize(width: 830, height: 150), cornerRadius: 10.0)
+        buttonPowerup.position = CGPoint(x: self.frame.minX + 1340, y: self.frame.maxY - 300)
         buttonPowerup.strokeColor = .init(white: 1.0, alpha: 1.0)
         buttonPowerup.fillColor = .init(white: 1.0, alpha: 0.3)
         buttonPowerup.name = "buttonPowerup"
@@ -205,7 +205,7 @@ class GarageScene: SKScene {
         powerup1.setScale(0.6)
         powerup1.zPosition = 3
         powerup1.alpha = 0.5
-        powerup1.position = CGPoint(x: self.frame.midX - 240, y: self.frame.minY + 100)
+        powerup1.position = CGPoint(x: self.frame.midX  - 300, y: self.frame.maxY - 300)
         let dicker = SKAction.scale(to: 0.5, duration: 0.6)
         let dunner = SKAction.scale(to: 0.3, duration: 0.6)
         let aufdicken = SKAction.sequence([dicker, dunner])
@@ -214,35 +214,35 @@ class GarageScene: SKScene {
         powerup2.setScale(0.4)
         powerup2.zPosition = 3
         powerup2.alpha = 0.5
-        powerup2.position = CGPoint(x: self.frame.midX - 120, y: self.frame.minY + 100)
+        powerup2.position = CGPoint(x: self.frame.midX  - 130, y: self.frame.maxY - 300)
         powerup2.run(SKAction.repeatForever(aufdicken))
         addChild(powerup2)
         powerup3.setScale(0.4)
         powerup3.zPosition = 3
         powerup3.alpha = 0.5
-        powerup3.position = CGPoint(x: self.frame.midX , y: self.frame.minY + 100)
+        powerup3.position = CGPoint(x: self.frame.midX  + 40, y: self.frame.maxY - 300)
         powerup3.run(SKAction.repeatForever(aufdicken))
         addChild(powerup3)
         powerup4.setScale(0.4)
         powerup4.zPosition = 3
         powerup4.alpha = 0.5
-        powerup4.position = CGPoint(x: self.frame.midX + 120, y: self.frame.minY + 100)
+        powerup4.position = CGPoint(x: self.frame.midX  + 210, y: self.frame.maxY - 300)
         powerup4.run(SKAction.repeatForever(aufdicken))
         addChild(powerup4)
         powerup5.setScale(0.4)
         powerup5.zPosition = 3
         powerup5.alpha = 0.5
-        powerup5.position = CGPoint(x: self.frame.midX + 240, y: self.frame.minY + 100)
+        powerup5.position = CGPoint(x: self.frame.midX  + 380, y: self.frame.maxY - 300)
         powerup5.run(SKAction.repeatForever(aufdicken))
         addChild(powerup5)
         
         let laserBeam1 = SKSpriteNode(imageNamed: arrayLaser[0])
-        laserBeam1.position = CGPoint(x: self.frame.minX + 200, y: self.frame.midY + 260)
+        laserBeam1.position = CGPoint(x: self.frame.midX  - 300, y: self.frame.maxY - 100)
         laserBeam1.zPosition = 5
         laserBeam1.setScale(2.0)
         addChild(laserBeam1)
         let buttonLaser1 = SKShapeNode(rectOf: CGSize(width: 150, height: 150), cornerRadius: 10.0)
-        buttonLaser1.position = CGPoint(x: self.frame.minX + 200, y: self.frame.midY + 260 )
+        buttonLaser1.position = CGPoint(x: self.frame.midX - 300, y: self.frame.maxY - 100 )
         buttonLaser1.strokeColor = .init(white: 1.0, alpha: 1.0)
         buttonLaser1.fillColor = .init(white: 1.0, alpha: 0.3)
         buttonLaser1.name = "buttonLaser1"
@@ -250,12 +250,12 @@ class GarageScene: SKScene {
         addChild(buttonLaser1)
         
         let laserBeam2 = SKSpriteNode(imageNamed: arrayLaser[1])
-        laserBeam2.position = CGPoint(x: self.frame.minX + 200, y: self.frame.midY + 90 )
+        laserBeam2.position = CGPoint(x: self.frame.midX  - 130, y: self.frame.maxY - 100)
         laserBeam2.zPosition = 5
         laserBeam2.setScale(2.0)
         addChild(laserBeam2)
         let buttonLaser2 = SKShapeNode(rectOf: CGSize(width: 150, height: 150), cornerRadius: 10.0)
-        buttonLaser2.position = CGPoint(x: self.frame.minX + 200, y: self.frame.midY + 90 )
+        buttonLaser2.position = CGPoint(x: self.frame.midX  - 130, y: self.frame.maxY - 100)
         buttonLaser2.strokeColor = .init(white: 1.0, alpha: 1.0)
         buttonLaser2.fillColor = .init(white: 1.0, alpha: 0.3)
         buttonLaser2.name = "buttonLaser2"
@@ -264,11 +264,11 @@ class GarageScene: SKScene {
         
         let laserBeam3 = SKSpriteNode(imageNamed: arrayLaser[2])
         laserBeam3.zPosition = 5
-        laserBeam3.position = CGPoint(x: self.frame.minX + 200, y: self.frame.midY - 80)
+        laserBeam3.position = CGPoint(x: self.frame.midX  + 40, y: self.frame.maxY - 100)
         laserBeam3.setScale(2.0)
         addChild(laserBeam3)
         let buttonLaser3 = SKShapeNode(rectOf: CGSize(width: 150, height: 150), cornerRadius: 10.0)
-        buttonLaser3.position = CGPoint(x: self.frame.minX + 200, y: self.frame.midY - 80)
+        buttonLaser3.position = CGPoint(x: self.frame.midX  + 40, y: self.frame.maxY - 100)
         buttonLaser3.strokeColor = .init(white: 1.0, alpha: 1.0)
         buttonLaser3.fillColor = .init(white: 1.0, alpha: 0.3)
         buttonLaser3.name = "buttonLaser3"
@@ -277,22 +277,35 @@ class GarageScene: SKScene {
         
         let laserBeam4 = SKSpriteNode(imageNamed: arrayLaser[3])
         laserBeam4.zPosition = 5
-        laserBeam4.position = CGPoint(x: self.frame.minX + 200, y: self.frame.midY - 250)
+        laserBeam4.position =  CGPoint(x: self.frame.midX  + 210, y: self.frame.maxY - 100)
         laserBeam4.setScale(2.0)
         addChild(laserBeam4)
         let buttonLaser4 = SKShapeNode(rectOf: CGSize(width: 150, height: 150), cornerRadius: 10.0)
-        buttonLaser4.position = CGPoint(x: self.frame.minX + 200, y: self.frame.midY - 250)
+        buttonLaser4.position = CGPoint(x: self.frame.midX  + 210, y: self.frame.maxY - 100)
         buttonLaser4.strokeColor = .init(white: 1.0, alpha: 1.0)
         buttonLaser4.fillColor = .init(white: 1.0, alpha: 0.3)
         buttonLaser4.name = "buttonLaser4"
         buttonLaser4.zPosition = 6
         addChild(buttonLaser4)
         
+        let laserBeam5 = SKSpriteNode(imageNamed: arrayLaser[3])
+        laserBeam5.zPosition = 5
+        laserBeam5.position =  CGPoint(x: self.frame.midX  + 380, y: self.frame.maxY - 100)
+        laserBeam5.setScale(2.0)
+        addChild(laserBeam5)
+        let buttonLaser5 = SKShapeNode(rectOf: CGSize(width: 150, height: 150), cornerRadius: 10.0)
+        buttonLaser5.position = CGPoint(x: self.frame.midX  + 380, y: self.frame.maxY - 100)
+        buttonLaser5.strokeColor = .init(white: 1.0, alpha: 1.0)
+        buttonLaser5.fillColor = .init(white: 1.0, alpha: 0.3)
+        buttonLaser5.name = "buttonLaser4"
+        buttonLaser5.zPosition = 6
+        addChild(buttonLaser5)
+        
         let menu = SKSpriteNode(imageNamed: "buttonLittle.jpg")
         menu.name = "Menu"
         menu.zPosition = 5
-        menu.position = CGPoint(x: self.frame.midX-900, y: self.frame.midY-500)
-        menu.setScale(0.4)
+        menu.position = CGPoint(x: self.frame.minX + 200, y: self.frame.midY-500)
+        menu.setScale(0.35)
         self.addChild(menu)
         
 //navibar:
@@ -304,14 +317,14 @@ class GarageScene: SKScene {
         addChild(coins)
         
         scoreCoins = SKLabelNode(fontNamed: "Chalkduster")
-        scoreCoins.setScale(3.5)
+        scoreCoins.setScale(2.5)
         scoreCoins.zPosition = 5
         scoreCoins.text = "\(playerCoins)"
         scoreCoins.position = CGPoint(x: self.frame.minX + 400, y: self.frame.maxY - 150)
         addChild(scoreCoins)
         
         priceCoins = SKLabelNode(fontNamed: "Chalkduster")
-        priceCoins.setScale(3.5)
+        priceCoins.setScale(2.5)
         priceCoins.zPosition = 5
         priceCoins.text = "- \(20)"
         priceCoins.alpha = 0.0
@@ -319,7 +332,7 @@ class GarageScene: SKScene {
         addChild(priceCoins)
         
         priceZero = SKLabelNode(fontNamed: "Chalkduster")
-        priceZero.setScale(3)
+        priceZero.setScale(2.5)
         priceZero.zPosition = 2
         priceZero.text = "? $$$ ?"
         priceZero.alpha = 0.0
@@ -625,8 +638,8 @@ class GarageScene: SKScene {
      }
     
     func boundsKnochen(){
-        let bottomLeft = CGPoint(x: 1500, y: 200)
-        let topRight = CGPoint(x: 2200, y: 1000)
+        let bottomLeft = CGPoint(x: 1300, y: 200)
+        let topRight = CGPoint(x: 2200, y: 700)
 
         if(knochen.position.x <= bottomLeft.x){
             knochen.position.x = bottomLeft.x
@@ -643,8 +656,8 @@ class GarageScene: SKScene {
     }
     
     func boundsZange(){
-        let bottomLeft = CGPoint(x: 500, y: 200)
-        let topRight = CGPoint(x: 1000, y: 1000)
+        let bottomLeft = CGPoint(x: 400, y: 200)
+        let topRight = CGPoint(x: 1300, y: 700)
 
         if(zange.position.x <= bottomLeft.x){
             zange.position.x = bottomLeft.x

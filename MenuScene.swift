@@ -129,14 +129,14 @@ class MenuScene: SKScene {
         let back = SKAction.follow(pith.cgPath, asOffset: true, orientToPath: true, speed: 180)
         let blablub = SKAction.sequence([movement, wait, back, wait])
         player.run(SKAction.repeatForever(blablub))
-        /*
+        
         let disc = SKShapeNode(circleOfRadius: 230)
         disc.name = "disc"
         disc.zPosition = 5
         disc.strokeColor = .init(white: 1.0, alpha: 0.5)
         disc.position = CGPoint(x: self.frame.midX - 1060, y: self.frame.midY-270)
         self.addChild(disc)
-       */
+       
         if let twinkle = SKEmitterNode(fileNamed: "particle-explosion"){
             twinkle.position = disc.position
             twinkle.particleTexture = SKTexture(imageNamed: "particle-star")
@@ -305,11 +305,11 @@ class MenuScene: SKScene {
                 transition: .crossFade(withDuration: 2))
                 run("sound-button")
             }
-            /*if node.name == "disc" {
+            if node.name == "disc" {
                 self.view?.presentScene(DiscScene(size: self.size),
                 transition: .crossFade(withDuration: 2))
                 run("sound-button")
-            }*/
+            }
             if node.name == "draw" {
                 self.view?.presentScene(DrawScene(size: self.size),
                 transition: .crossFade(withDuration: 2))
