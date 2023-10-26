@@ -108,7 +108,7 @@ class GarageScene: SKScene {
         labelPowerExplained.setScale(2.5)
         labelPowerExplained.zPosition = 5
         labelPowerExplained.text = "PowerUp"
-        labelPowerExplained.position = CGPoint(x: self.frame.minX + 800, y: self.frame.maxY - 350)
+        labelPowerExplained.position = CGPoint(x: self.frame.minX + 750, y: self.frame.maxY - 350)
         addChild(labelPowerExplained)
         
         // Change Colors
