@@ -488,7 +488,7 @@ class GarageScene: SKScene {
                 buttonFusilW.alpha = 1.0
                 run("sound-button")
                 self.indexW += 1
-                if indexW == 17{ indexW = 0 }
+                if indexW == 7{ indexW = 0 }
                 let action = SKAction.setTexture(SKTexture(imageNamed: arrayFusil[indexW]), resize: true)
                 self.buttonFusilW.run(action)
                 
@@ -498,8 +498,9 @@ class GarageScene: SKScene {
             if node.name == "buttonFusil"{
                 buttonFusil.alpha = 1.0
                 run("sound-button")
+                indexW = 6
                 self.indexW += 1
-                if indexW == 17{ indexW = 0 }
+                if indexW == 17{ indexW = 7 }
                 let action = SKAction.setTexture(SKTexture(imageNamed: arrayFusil[indexW]), resize: true)
                 self.buttonFusil.run(action)
                 
