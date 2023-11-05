@@ -148,7 +148,7 @@ class MenuScene: SKScene {
         draw.name = "draw"
         draw.zPosition = 5
         draw.position = CGPoint(x: self.frame.midX-700, y: self.frame.midY-450)
-        draw.setScale(0.5)
+        draw.setScale(0.4)
         self.addChild(draw)
         let links = SKAction.rotate(byAngle: 0.3, duration: 0.05)
         let rechts = SKAction.rotate(byAngle: -0.3, duration: 1.0)
@@ -167,29 +167,28 @@ class MenuScene: SKScene {
         
         if playerCoins < 0 { playerCoins = 0}
         scoreCoins = SKLabelNode(fontNamed: "Chalkduster")
-        scoreCoins.setScale(3.5)
+        scoreCoins.setScale(2.0)
         scoreCoins.zPosition = 5
         scoreCoins.text = "\(playerCoins) "
-        scoreCoins.position = CGPoint(x: self.frame.midX-600, y: self.frame.midY + 500)
+        scoreCoins.position = CGPoint(x: self.frame.minX + 400, y: self.frame.maxY - 130)
         addChild(scoreCoins)
         
         //navibar:
         let coins = SKSpriteNode(imageNamed: "objectCoin.jpg")
-        //coins.name = "play"
-        coins.position = CGPoint(x: self.frame.midX-850, y: self.frame.midY + 550)
-        coins.setScale(0.6)
+        coins.position = CGPoint(x: self.frame.minX + 200, y: self.frame.maxY - 100)
+        coins.setScale(0.3)
         coins.zPosition = 5
         addChild(coins)
         
         labelGarageExplained = SKLabelNode(fontNamed: "Chalkduster")
-        labelGarageExplained.setScale(2.5)
+        labelGarageExplained.setScale(2.0)
         labelGarageExplained.zPosition = 5
         labelGarageExplained.text = "Garage ->"
         labelGarageExplained.position = CGPoint(x: self.frame.midX+300, y: self.frame.minY + 100)
         addChild(labelGarageExplained)
         
         labelMonthExplained = SKLabelNode(fontNamed: "Chalkduster")
-        labelMonthExplained.setScale(2.5)
+        labelMonthExplained.setScale(2.0)
         labelMonthExplained.zPosition = 5
         labelMonthExplained.text = "> Turn to fav Month <"
         labelMonthExplained.position = CGPoint(x: self.frame.midX, y: self.frame.minY + 400)

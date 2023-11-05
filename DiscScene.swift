@@ -20,6 +20,8 @@ class DiscScene: SKScene {
     var startingAngle:CGFloat?
     var startingTime:TimeInterval?
     
+    var labelMapExplained = SKLabelNode()
+    
     override func didMove(to view: SKView) {
         
         self.magicStick = SKEmitterNode(fileNamed: "MyParticle.sks")
@@ -29,7 +31,7 @@ class DiscScene: SKScene {
             magicStick.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.5), SKAction.removeFromParent()]))
         }
         
-        let backgroundImage = SKSpriteNode(imageNamed: "BgMenu")
+        let backgroundImage = SKSpriteNode(imageNamed: "bgDisc")
         backgroundImage.anchorPoint = CGPointMake(0.5, 0.5)
         backgroundImage.size = CGSize(width: self.frame.width, height: self.frame.height + 500)
         backgroundImage.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 200)
@@ -37,11 +39,18 @@ class DiscScene: SKScene {
         backgroundImage.isUserInteractionEnabled = false
         addChild(backgroundImage)
         
+        labelMapExplained = SKLabelNode(fontNamed: "Chalkduster")
+        labelMapExplained.setScale(2.0)
+        labelMapExplained.zPosition = 5
+        labelMapExplained.text = "turn the map to see the constellations of the zodiac signs"
+        labelMapExplained.position = CGPoint(x: self.frame.midX , y: self.frame.minY + 90)
+        addChild(labelMapExplained)
+        
         let menu = SKSpriteNode(imageNamed: "buttonLittle.jpg")
         menu.name = "Menu"
         menu.zPosition = 5
-        menu.position = CGPoint(x: self.frame.midX-700, y: self.frame.midY-450)
-        menu.setScale(0.4)
+        menu.position = CGPoint(x: self.frame.minX + 240, y: self.frame.minY + 240)
+        menu.setScale(0.3)
         self.addChild(menu)
 
         spawnPlayer()

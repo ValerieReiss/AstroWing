@@ -118,31 +118,31 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         let menu = SKSpriteNode(imageNamed: "buttonLittle.jpg")
         menu.name = "Menu"
         menu.zPosition = 5
-        menu.position = CGPoint(x: self.frame.midX-600, y: self.frame.midY-435)
-        menu.setScale(0.4)
+        menu.position = CGPoint(x: self.frame.midX-600, y: self.frame.minY + 180)
+        menu.setScale(0.3)
         self.addChild(menu)
         
         //navibar:
         let coins = SKSpriteNode(imageNamed: "objectCoin.jpg")
         coins.name = "play"
-        coins.position = CGPoint(x: self.frame.midX-720, y: self.frame.midY+485)
-        coins.setScale(0.4)
+        coins.position = CGPoint(x: self.frame.minX + 300, y: self.frame.maxY - 200)
+        coins.setScale(0.3)
         coins.zPosition = 5
         addChild(coins)
         
         scoreCoins = SKLabelNode(fontNamed: "Chalkduster")
-        scoreCoins.setScale(1.6)
+        scoreCoins.setScale(2.0)
         scoreCoins.zPosition = 5
         scoreCoins.text = "\(playerCoins)"
-        scoreCoins.position = CGPoint(x: self.frame.midX - 600, y: self.frame.midY+470)
+        scoreCoins.position = CGPoint(x: self.frame.minX + 500, y: self.frame.maxY - 230)
         addChild(scoreCoins)
         
         priceCoins = SKLabelNode(fontNamed: "Chalkduster")
-        priceCoins.setScale(1.6)
+        priceCoins.setScale(2.0)
         priceCoins.zPosition = 5
         priceCoins.text = ""
         priceCoins.alpha = 0.0
-        priceCoins.position = CGPoint(x: self.frame.midX-350, y: self.frame.midY+470)
+        priceCoins.position = CGPoint(x: self.frame.minX + 700, y: self.frame.maxY - 230)
         addChild(priceCoins)
         
         battery0.position = CGPoint(x: self.frame.midX-850, y: self.frame.midY+550)
@@ -242,37 +242,37 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         Powerups.zPosition = 6
         addChild(Powerups)
         
-        powerup1.setScale(0.4)
+        powerup1.setScale(0.3)
         powerup1.zPosition = 2
         powerup1.alpha = 0.3
-        powerup1.position = CGPoint(x: self.frame.midX - 180, y: self.frame.midY-380)
-        let dicker = SKAction.scale(to: 0.2, duration: 0.4)
-        let dunner = SKAction.scale(to: 0.5, duration: 0.4)
+        powerup1.position = CGPoint(x: self.frame.midX - 180, y: self.frame.midY-350)
+        let dicker = SKAction.scale(to: 0.3, duration: 0.6)
+        let dunner = SKAction.scale(to: 0.2, duration: 0.6)
         let aufdicken = SKAction.sequence([dicker, dunner])
         powerup1.run(SKAction.repeatForever(aufdicken))
         addChild(powerup1)
-        powerup2.setScale(0.4)
+        powerup2.setScale(0.3)
         powerup2.zPosition = 2
         powerup2.alpha = 0.3
-        powerup2.position = CGPoint(x: self.frame.midX - 90, y: self.frame.midY-380)
+        powerup2.position = CGPoint(x: self.frame.midX - 90, y: self.frame.midY-350)
         powerup2.run(SKAction.repeatForever(aufdicken))
         addChild(powerup2)
-        powerup3.setScale(0.4)
+        powerup3.setScale(0.3)
         powerup3.zPosition = 2
         powerup3.alpha = 0.3
-        powerup3.position = CGPoint(x: self.frame.midX , y: self.frame.midY-380)
+        powerup3.position = CGPoint(x: self.frame.midX , y: self.frame.midY-350)
         powerup3.run(SKAction.repeatForever(aufdicken))
         addChild(powerup3)
-        powerup4.setScale(0.4)
+        powerup4.setScale(0.3)
         powerup4.zPosition = 2
         powerup4.alpha = 0.3
-        powerup4.position = CGPoint(x: self.frame.midX + 90, y: self.frame.midY-380)
+        powerup4.position = CGPoint(x: self.frame.midX + 90, y: self.frame.midY-350)
         powerup4.run(SKAction.repeatForever(aufdicken))
         addChild(powerup4)
-        powerup5.setScale(0.4)
+        powerup5.setScale(0.3)
         powerup5.zPosition = 2
         powerup5.alpha = 0.3
-        powerup5.position = CGPoint(x: self.frame.midX + 180, y: self.frame.midY-380)
+        powerup5.position = CGPoint(x: self.frame.midX + 180, y: self.frame.midY-350)
         powerup5.run(SKAction.repeatForever(aufdicken))
         addChild(powerup5)
         
@@ -648,7 +648,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
     
     func spawnCoins() {
         let coin = SKSpriteNode(imageNamed: "objectCoin")
-        coin.setScale(0.4)
+        coin.setScale(0.3)
         coin.zPosition = 2
         coin.name = "coin"
         coin.position = CGPoint( x: Int.random(in: 300 ..< 2300),
@@ -660,11 +660,12 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         let wobble = SKAction.sequence([left, right])
         coin.run(SKAction.repeatForever(wobble))
         
-        let destination = CGPoint(x: Int.random(in: 10 ..< 1190), y: -200)
-        let coinMove = SKAction.move(to: destination, duration: 8)
+       // let destination = CGPoint(x: Int.random(in: 10 ..< 1190), y: -200)
+        let coinFall = SKAction.moveTo(y: -200, duration: 8)
+        //let coinMove = SKAction.move(to: y: -200, duration: 8)//(to: destination, duration: 8)
         let coinRemove = SKAction.removeFromParent()
         
-        let animation = SKAction.sequence([coinMove, coinRemove])
+        let animation = SKAction.sequence([coinFall, coinRemove])
         coin.run(animation)
     }
     

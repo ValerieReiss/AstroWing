@@ -50,6 +50,8 @@ class GarageScene: SKScene {
     
     var labelLaserExplained = SKLabelNode()
     var labelColorExplained = SKLabelNode()
+    var labelFusil1 = SKLabelNode()
+    var labelFusil2 = SKLabelNode()
     var labelPowerExplained = SKLabelNode()
     
     override func didMove(to view: SKView) {
@@ -91,24 +93,38 @@ class GarageScene: SKScene {
         //Texts to Explain Stuff
         
         labelLaserExplained = SKLabelNode(fontNamed: "Chalkduster")
-        labelLaserExplained.setScale(2.5)
+        labelLaserExplained.setScale(2.0)
         labelLaserExplained.zPosition = 5
         labelLaserExplained.text = "Laser"
-        labelLaserExplained.position = CGPoint(x: self.frame.minX + 800, y: self.frame.maxY - 150)
+        labelLaserExplained.position = CGPoint(x: self.frame.minX + 800, y: self.frame.maxY - 100)
         addChild(labelLaserExplained)
         
         labelColorExplained = SKLabelNode(fontNamed: "Chalkduster")
-        labelColorExplained.setScale(2.5)
+        labelColorExplained.setScale(2.0)
         labelColorExplained.zPosition = 5
-        labelColorExplained.text = "Color 100$"
-        labelColorExplained.position = CGPoint(x: self.frame.maxX - 400, y: self.frame.maxY - 150)
+        labelColorExplained.text = "Buy Color"
+        labelColorExplained.position = CGPoint(x: self.frame.maxX - 400, y: self.frame.maxY - 100)
         addChild(labelColorExplained)
         
+        labelFusil1 = SKLabelNode(fontNamed: "Chalkduster")
+        labelFusil1.setScale(1.5)
+        labelFusil1.zPosition = 5
+        labelFusil1.text = "Color"
+        labelFusil1.position = CGPoint(x: self.frame.maxX - 600, y: self.frame.maxY - 480)
+        addChild(labelFusil1)
+        
+        labelFusil2 = SKLabelNode(fontNamed: "Chalkduster")
+        labelFusil2.setScale(1.5)
+        labelFusil2.zPosition = 5
+        labelFusil2.text = "Other"
+        labelFusil2.position = CGPoint(x: self.frame.maxX - 200, y: self.frame.maxY - 480)
+        addChild(labelFusil2)
+        
         labelPowerExplained = SKLabelNode(fontNamed: "Chalkduster")
-        labelPowerExplained.setScale(2.5)
+        labelPowerExplained.setScale(2.0)
         labelPowerExplained.zPosition = 5
         labelPowerExplained.text = "PowerUp"
-        labelPowerExplained.position = CGPoint(x: self.frame.minX + 750, y: self.frame.maxY - 350)
+        labelPowerExplained.position = CGPoint(x: self.frame.minX + 750, y: self.frame.maxY - 300)
         addChild(labelPowerExplained)
         
         // Change Colors
@@ -137,22 +153,22 @@ class GarageScene: SKScene {
         indexW = 3 //Int.random(in: 0..<10)
         
         buttonFusil.name = "buttonFusil"
-        buttonFusil.position = CGPoint(x: self.frame.maxX - 200, y: self.frame.maxY - 400)
+        buttonFusil.position = CGPoint(x: self.frame.maxX - 250, y: self.frame.maxY - 320)
         buttonFusil.zPosition = 2
         addChild(buttonFusil)
         buttonFusil.texture = SKTexture(imageNamed: arrayFusil[indexW])
         buttonFusil.physicsBody = SKPhysicsBody(texture: buttonFusilW.texture!, size: buttonFusilW.texture!.size())
         buttonFusil.physicsBody?.isDynamic = false
-        buttonFusil.setScale(1.0)
+        buttonFusil.setScale(0.75)
         
         buttonFusilW.name = "buttonFusilW"
-        buttonFusilW.position = CGPoint(x: self.frame.maxX - 600, y: self.frame.maxY - 400)
+        buttonFusilW.position = CGPoint(x: self.frame.maxX - 550, y: self.frame.maxY - 320)
         buttonFusilW.zPosition = 2
         addChild(buttonFusilW)
         buttonFusilW.texture = SKTexture(imageNamed: arrayFusil[indexW])
         buttonFusilW.physicsBody = SKPhysicsBody(texture: buttonFusilW.texture!, size: buttonFusilW.texture!.size())
         buttonFusilW.physicsBody?.isDynamic = false
-        buttonFusilW.setScale(1.0)
+        buttonFusilW.setScale(0.70)
         
         /*let bigFusil = SKShapeNode(rectOf: CGSize(width: 600, height: 600))
         bigFusil.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
@@ -202,34 +218,34 @@ class GarageScene: SKScene {
         buttonPowerup.zPosition = 2
         addChild(buttonPowerup)
         
-        powerup1.setScale(0.6)
+        powerup1.setScale(0.3)
         powerup1.zPosition = 3
         powerup1.alpha = 0.5
         powerup1.position = CGPoint(x: self.frame.midX  - 300, y: self.frame.maxY - 300)
-        let dicker = SKAction.scale(to: 0.5, duration: 0.6)
-        let dunner = SKAction.scale(to: 0.3, duration: 0.6)
+        let dicker = SKAction.scale(to: 0.3, duration: 0.6)
+        let dunner = SKAction.scale(to: 0.2, duration: 0.6)
         let aufdicken = SKAction.sequence([dicker, dunner])
         powerup1.run(SKAction.repeatForever(aufdicken))
         addChild(powerup1)
-        powerup2.setScale(0.4)
+        powerup2.setScale(0.3)
         powerup2.zPosition = 3
         powerup2.alpha = 0.5
         powerup2.position = CGPoint(x: self.frame.midX  - 130, y: self.frame.maxY - 300)
         powerup2.run(SKAction.repeatForever(aufdicken))
         addChild(powerup2)
-        powerup3.setScale(0.4)
+        powerup3.setScale(0.3)
         powerup3.zPosition = 3
         powerup3.alpha = 0.5
         powerup3.position = CGPoint(x: self.frame.midX  + 40, y: self.frame.maxY - 300)
         powerup3.run(SKAction.repeatForever(aufdicken))
         addChild(powerup3)
-        powerup4.setScale(0.4)
+        powerup4.setScale(0.3)
         powerup4.zPosition = 3
         powerup4.alpha = 0.5
         powerup4.position = CGPoint(x: self.frame.midX  + 210, y: self.frame.maxY - 300)
         powerup4.run(SKAction.repeatForever(aufdicken))
         addChild(powerup4)
-        powerup5.setScale(0.4)
+        powerup5.setScale(0.3)
         powerup5.zPosition = 3
         powerup5.alpha = 0.5
         powerup5.position = CGPoint(x: self.frame.midX  + 380, y: self.frame.maxY - 300)
@@ -287,7 +303,7 @@ class GarageScene: SKScene {
         buttonLaser4.name = "buttonLaser4"
         buttonLaser4.zPosition = 6
         addChild(buttonLaser4)
-        
+        /*
         let laserBeam5 = SKSpriteNode(imageNamed: arrayLaser[3])
         laserBeam5.zPosition = 5
         laserBeam5.position =  CGPoint(x: self.frame.midX  + 380, y: self.frame.maxY - 100)
@@ -300,43 +316,43 @@ class GarageScene: SKScene {
         buttonLaser5.name = "buttonLaser4"
         buttonLaser5.zPosition = 6
         addChild(buttonLaser5)
-        
+        */
         let menu = SKSpriteNode(imageNamed: "buttonLittle.jpg")
         menu.name = "Menu"
         menu.zPosition = 5
         menu.position = CGPoint(x: self.frame.minX + 200, y: self.frame.midY-500)
-        menu.setScale(0.35)
+        menu.setScale(0.30)
         self.addChild(menu)
         
 //navibar:
         let coins = SKSpriteNode(imageNamed: "objectCoin.jpg")
         coins.name = "play"
         coins.position = CGPoint(x: self.frame.minX + 200, y: self.frame.maxY - 100)
-        coins.setScale(0.5)
+        coins.setScale(0.3)
         coins.zPosition = 5
         addChild(coins)
         
         scoreCoins = SKLabelNode(fontNamed: "Chalkduster")
-        scoreCoins.setScale(2.5)
+        scoreCoins.setScale(2.0)
         scoreCoins.zPosition = 5
         scoreCoins.text = "\(playerCoins)"
-        scoreCoins.position = CGPoint(x: self.frame.minX + 400, y: self.frame.maxY - 150)
+        scoreCoins.position = CGPoint(x: self.frame.minX + 400, y: self.frame.maxY - 130)
         addChild(scoreCoins)
         
         priceCoins = SKLabelNode(fontNamed: "Chalkduster")
-        priceCoins.setScale(2.5)
+        priceCoins.setScale(2.0)
         priceCoins.zPosition = 5
         priceCoins.text = "- \(20)"
         priceCoins.alpha = 0.0
-        priceCoins.position = CGPoint(x: self.frame.minX+650, y: self.frame.maxY - 150)
+        priceCoins.position = CGPoint(x: self.frame.minX+600, y: self.frame.maxY - 130)
         addChild(priceCoins)
         
         priceZero = SKLabelNode(fontNamed: "Chalkduster")
-        priceZero.setScale(2.5)
+        priceZero.setScale(2.0)
         priceZero.zPosition = 2
         priceZero.text = "? $$$ ?"
         priceZero.alpha = 0.0
-        priceZero.position = CGPoint(x: self.frame.minX+650, y: self.frame.maxY - 150)
+        priceZero.position = CGPoint(x: self.frame.minX+600, y: self.frame.maxY - 130)
         addChild(priceZero)
     }
     
@@ -359,7 +375,7 @@ class GarageScene: SKScene {
             }
             if node.name == "knochen" {
                 touchLocation = location
-                run("sound-Coin")
+                run("click2")
                 let left = SKAction.rotate(byAngle: +1.552, duration: 0.2)
                 let klick1 = SKAction.rotate(byAngle: 0.1, duration:0.1)
                 let klick2 = SKAction.rotate(byAngle: -0.1, duration:0.1)
@@ -369,7 +385,7 @@ class GarageScene: SKScene {
             }
             if node.name == "zange" {
                 touchLocation = location
-                run("sound-Coin")
+                run("click1")
                 let left = SKAction.rotate(byAngle: -1.552, duration: 0.2)
                 let klick1 = SKAction.rotate(byAngle: 0.1, duration:0.1)
                 let klick2 = SKAction.rotate(byAngle: -0.1, duration:0.1)
@@ -487,6 +503,7 @@ class GarageScene: SKScene {
             if node.name == "buttonFusilW"{
                 buttonFusilW.alpha = 1.0
                 run("sound-button")
+                if indexW > 7 {indexW = 0}
                 self.indexW += 1
                 if indexW == 7{ indexW = 0 }
                 let action = SKAction.setTexture(SKTexture(imageNamed: arrayFusil[indexW]), resize: true)
@@ -498,7 +515,7 @@ class GarageScene: SKScene {
             if node.name == "buttonFusil"{
                 buttonFusil.alpha = 1.0
                 run("sound-button")
-                indexW = 6
+                if indexW < 7 {indexW = 7}
                 self.indexW += 1
                 if indexW == 17{ indexW = 7 }
                 let action = SKAction.setTexture(SKTexture(imageNamed: arrayFusil[indexW]), resize: true)
