@@ -31,7 +31,7 @@ import simd
 class Scene0: SKScene, SKPhysicsContactDelegate {
     let arrayLaser = ["laserBeam1", "laserBeam2", "laserBeam3", "laserBeam4"]
     let arrayFusil = ["fusil00", "fusil00Wblack", "fusil00Wblue", "fusil00Wcyan", "fusil00Wgreen", "fusil00Worange", "fusil00Wpink", "fusil011", "fusil012", "fusil013", "fusil014", "fusil015", "fusil016", "fusil017", "fusil021", "fusil022", "fusil023", "fusil024"]
-    let arrayGegner = ["object10", "object11", "object12H", "object1", "object2", "object3", "object4", "object5", "object6", "object7", "object8", "object9"]
+    let arrayGegner = ["object10", "object11", "object12H", "object1", "object2", "object3", "object4", "object5", "object6", "object7W", "object8", "object9"]
     var indexGegner = 0
     let player = Player()
     let gegner = Gegner(type: 0)
@@ -47,7 +47,9 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
     
     var priceCoins: SKLabelNode!
     var scoreCoins: SKLabelNode!
-    //var scoreHearts: SKLabelNode!
+    
+    var labelplayerHearts: SKLabelNode!
+    var labelgegnerHearts: SKLabelNode!
     
     var shotweapon = 0
     
@@ -129,6 +131,21 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         coins.setScale(0.3)
         coins.zPosition = 5
         addChild(coins)
+        
+        
+        labelplayerHearts = SKLabelNode(fontNamed: "Chalkduster")
+        labelplayerHearts.setScale(2.0)
+        labelplayerHearts.zPosition = 5
+        labelplayerHearts.text = "\(playerHearts)"
+        labelplayerHearts.position = CGPoint(x: self.frame.minX + 200, y: self.frame.maxY - 100)
+        addChild(labelplayerHearts)
+        
+        labelgegnerHearts = SKLabelNode(fontNamed: "Chalkduster")
+        labelgegnerHearts.setScale(2.0)
+        labelgegnerHearts.zPosition = 5
+        labelgegnerHearts.text = "\(gegnerHearts)"
+        labelgegnerHearts.position = CGPoint(x: self.frame.maxX - 200, y: self.frame.maxY - 100)
+        addChild(labelgegnerHearts)
         
         scoreCoins = SKLabelNode(fontNamed: "Chalkduster")
         scoreCoins.setScale(2.0)
@@ -419,11 +436,11 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         }
         else if playerLevel == 9{ // Krebs - Juli
             gegner.position = CGPoint( x: Int.random(in: 500..<1400), y: 1500)
-            let gegner2 = SKTexture(imageNamed: "object7")
+            /*let gegner2 = SKTexture(imageNamed: "object7")
             let gegner1 = SKTexture(imageNamed: "object7W")
             let animation = SKAction.animate(with: [gegner2, gegner1], timePerFrame: 0.2)
             let makeGegner = SKAction.repeatForever(animation)
-            gegner.run (makeGegner)
+            gegner.run (makeGegner)*/
             gegner.wobblefast()
             gegner.moveCancer()
             
@@ -612,7 +629,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
                     explosion.position = contact.bodyA.node!.position
                     addChild(explosion)}
             run("sound-bomb")
-            playerHearts -= 1
+            playerHearts -= 50
             if contact.bodyA.node?.name == "gegnerWeapon"{ contact.bodyA.node?.removeFromParent()}
             else {contact.bodyB.node?.removeFromParent()}
             if playerHearts <= 0 {
@@ -959,6 +976,8 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         checkHearts()
         checkGegnerHearts()
         scoreCoins.text = "\(playerCoins)"
+        labelplayerHearts.text = "\(playerHearts)"
+        labelgegnerHearts.text = "\(gegnerHearts)"
         
         player.boundsCheckPlayer()
         checkForCoins()

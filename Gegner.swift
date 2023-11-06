@@ -10,12 +10,13 @@ import SpriteKit
 import simd
 
 class Gegner: SKSpriteNode{
-    let arrayGegner = ["object10", "object11", "object12H", "object1", "object2", "object3", "object4", "object5", "object6", "object7", "object8", "object9"]
+    let arrayGegner = ["object10", "object11", "object12H", "object1", "object2", "object3", "object4", "object5", "object6", "object7W", "object8", "object9"]
     var type: Int
     
     init(type: Int){
         self.type = type
         let texture = SKTexture(imageNamed: arrayGegner[type])
+        
         super.init(texture: texture, color: .white, size: texture.size())
         
         self.name = "gegner"
@@ -170,7 +171,7 @@ class Gegner: SKSpriteNode{
     func moveCancer() {
         let down = SKAction.moveTo(y: 550, duration: 3.0)
         down.timingFunction = {time in return simd_smoothstep(0, 1, time) }
-        let back2 = SKAction.moveTo(y: 1500, duration: 0.5)
+        let back2 = SKAction.moveTo(y: 1500, duration: 3.0)
         let changeposition = SKAction.moveTo(x: CGFloat.random(in: 500..<2400), duration: 5.0)
         let sequence = SKAction.sequence([down, back2, changeposition])
         run(SKAction.repeatForever(sequence))
