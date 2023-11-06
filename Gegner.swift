@@ -23,13 +23,14 @@ class Gegner: SKSpriteNode{
        
         self.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
         self.physicsBody?.allowsRotation = false
-        self.setScale(0.1)
+        self.setScale(0.05)
         
         self.physicsBody?.isDynamic = true
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.contactTestBitMask = ColliderType.player.rawValue | ColliderType.laserBeam.rawValue
         self.physicsBody?.categoryBitMask  = ColliderType.gegner.rawValue
         self.physicsBody?.collisionBitMask = ColliderType.gegner.rawValue
+       
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -40,6 +41,12 @@ class Gegner: SKSpriteNode{
     func wobble(){
         let left = SKAction.rotate(byAngle: 0.4, duration: 0.6)
         let right = SKAction.rotate(byAngle: -0.4, duration: 0.6)
+        let wobble = SKAction.sequence([left, right])
+        run(SKAction.repeatForever(wobble))
+    }
+    func wobblefast(){
+        let left = SKAction.rotate(byAngle: 0.4, duration: 0.2)
+        let right = SKAction.rotate(byAngle: -0.4, duration: 0.2)
         let wobble = SKAction.sequence([left, right])
         run(SKAction.repeatForever(wobble))
     }
@@ -133,19 +140,22 @@ class Gegner: SKSpriteNode{
         run(SKAction.repeatForever(sequence))
     }
     func dance() {
-        let links = SKAction.move(to: CGPoint(x: CGFloat.random(in: 500 ..< 600), y: CGFloat.random(in: 1000 ..< 1100)), duration: 2.0)
+        let links = SKAction.move(to: CGPoint(x: CGFloat.random(in: 500 ..< 600), y: CGFloat.random(in: 900 ..< 1100)), duration: 1.0)
         links.timingFunction = {time in return simd_smoothstep(0, 1, time) }
        
-        let down = SKAction.move(to: CGPoint(x: CGFloat.random(in: 700 ..< 800), y: CGFloat.random(in: 700 ..< 800)), duration: 2.0)
+        let down = SKAction.move(to: CGPoint(x: CGFloat.random(in: 800 ..< 1100), y: CGFloat.random(in: 700 ..< 800)), duration: 1.0)
         down.timingFunction = {time in return simd_smoothstep(0, 1, time) }
        
-        let rechts = SKAction.move(to: CGPoint(x: CGFloat.random(in: 1900 ..< 2000), y: CGFloat.random(in: 700 ..< 800)), duration: 2.0)
+        let hoch = SKAction.move(to: CGPoint(x: CGFloat.random(in: 1200 ..< 1500), y: CGFloat.random(in: 900 ..< 1200)), duration: 1.0)
+        hoch.timingFunction = {time in return simd_smoothstep(0, 1, time) }
+        
+        let rechts = SKAction.move(to: CGPoint(x: CGFloat.random(in: 1600 ..< 1800), y: CGFloat.random(in: 650 ..< 750)), duration: 1.0)
         rechts.timingFunction = {time in return simd_smoothstep(0, 1, time) }
         
-        let up = SKAction.move(to: CGPoint(x: CGFloat.random(in: 1900 ..< 2000), y: CGFloat.random(in: 1000 ..< 1200)), duration: 2.0)
+        let up = SKAction.move(to: CGPoint(x: CGFloat.random(in: 1900 ..< 2000), y: CGFloat.random(in: 1000 ..< 1200)), duration: 1.0)
         up.timingFunction = {time in return simd_smoothstep(0, 1, time) }
         
-        let sequence = SKAction.sequence([links, down, rechts, up ])
+        let sequence = SKAction.sequence([links, down, hoch, rechts, up, rechts, hoch, down ])
         run(SKAction.repeatForever(sequence))
         
     }
@@ -158,10 +168,11 @@ class Gegner: SKSpriteNode{
         
     }
     func moveCancer() {
-        let down = SKAction.moveTo(y: 100, duration: 6.0)
+        let down = SKAction.moveTo(y: 550, duration: 3.0)
         down.timingFunction = {time in return simd_smoothstep(0, 1, time) }
-        let back2 = SKAction.moveTo(y: 800, duration: 0.2)
-        let sequence = SKAction.sequence([down, back2])
+        let back2 = SKAction.moveTo(y: 1500, duration: 0.5)
+        let changeposition = SKAction.moveTo(x: CGFloat.random(in: 500..<2400), duration: 5.0)
+        let sequence = SKAction.sequence([down, back2, changeposition])
         run(SKAction.repeatForever(sequence))
     }
     

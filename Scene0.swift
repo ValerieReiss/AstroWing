@@ -418,13 +418,13 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
             run(SKAction.repeatForever(sequence2))
         }
         else if playerLevel == 9{ // Krebs - Juli
-            gegner.position = CGPoint( x: Int.random(in: 500..<2400), y: Int(size.height))
+            gegner.position = CGPoint( x: Int.random(in: 500..<1400), y: 1500)
             let gegner2 = SKTexture(imageNamed: "object7")
             let gegner1 = SKTexture(imageNamed: "object7W")
-            let animation = SKAction.animate(with: [gegner2, gegner1], timePerFrame: 0.3)
+            let animation = SKAction.animate(with: [gegner2, gegner1], timePerFrame: 0.2)
             let makeGegner = SKAction.repeatForever(animation)
             gegner.run (makeGegner)
-            gegner.wobble()
+            gegner.wobblefast()
             gegner.moveCancer()
             
             let wait2 = SKAction.wait(forDuration: 8.0)
