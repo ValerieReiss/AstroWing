@@ -36,7 +36,7 @@ class Player: SKSpriteNode{
     self.physicsBody?.categoryBitMask = ColliderType.player.rawValue
     self.physicsBody?.collisionBitMask = ColliderType.player.rawValue
     //self.physicsBody?.categoryBitMask = PhysicsCategory.player
-    self.setScale(0.6)
+    self.setScale(0.5)
     
         //self.physicsBody?.contactTestBitMask = CollisionType.gegner.rawValue | CollisionType.gegnerWeapon.rawValue | CollisionType.gegnerWeapon1.rawValue | CollisionType.knochen.rawValue
 }

@@ -23,7 +23,7 @@ class Gegner: SKSpriteNode{
        
         self.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
         self.physicsBody?.allowsRotation = false
-        self.setScale(0.5)
+        self.setScale(0.1)
         
         self.physicsBody?.isDynamic = true
         self.physicsBody?.affectedByGravity = false
@@ -150,12 +150,19 @@ class Gegner: SKSpriteNode{
         
     }
     func moveUp() {
-        let movement = SKAction.moveTo(y: 1000, duration: 6.0)
-        let movement2 = SKAction.moveTo(y: -1000, duration: 6.0)
-        let changeposition = SKAction.moveTo(x: CGFloat.random(in: 200..<1000), duration: 3.0)
+        let movement = SKAction.moveTo(y: 1300, duration: 6.0)
+        let movement2 = SKAction.moveTo(y: -1300, duration: 6.0)
+        let changeposition = SKAction.moveTo(x: CGFloat.random(in: 500..<2400), duration: 3.0)
         let sequence = SKAction.sequence([movement, movement2, changeposition])
         run(SKAction.repeatForever(sequence))
         
+    }
+    func moveCancer() {
+        let down = SKAction.moveTo(y: 100, duration: 6.0)
+        down.timingFunction = {time in return simd_smoothstep(0, 1, time) }
+        let back2 = SKAction.moveTo(y: 800, duration: 0.2)
+        let sequence = SKAction.sequence([down, back2])
+        run(SKAction.repeatForever(sequence))
     }
     
     func hide(){

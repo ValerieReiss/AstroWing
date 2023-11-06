@@ -71,7 +71,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
     var batteryG3 = SKSpriteNode(imageNamed: "naviBatteryG3")
     var batteryG4 = SKSpriteNode(imageNamed: "naviBatteryG4")
     var batteryG5 = SKSpriteNode(imageNamed: "naviBatteryG5")
-    var gegnerHearts = 1000
+    var gegnerHearts = 2000
     
     var zahl = 0
     
@@ -418,14 +418,14 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
             run(SKAction.repeatForever(sequence2))
         }
         else if playerLevel == 9{ // Krebs - Juli
-            gegner.position = CGPoint( x: Int.random(in: 100..<1000), y: Int(size.height) - 900)
+            gegner.position = CGPoint( x: Int.random(in: 500..<2400), y: Int(size.height))
             let gegner2 = SKTexture(imageNamed: "object7")
             let gegner1 = SKTexture(imageNamed: "object7W")
             let animation = SKAction.animate(with: [gegner2, gegner1], timePerFrame: 0.3)
             let makeGegner = SKAction.repeatForever(animation)
             gegner.run (makeGegner)
             gegner.wobble()
-            gegner.moveUp()
+            gegner.moveCancer()
             
             let wait2 = SKAction.wait(forDuration: 8.0)
             let spawn2 = SKAction.run { self.spawnGegnerWeapon9()}
@@ -859,6 +859,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         let makeWeapon = SKAction.repeatForever(animation)
         gegnerWeapon.run (makeWeapon)
         gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
+        gegnerWeapon.setScale(0.3)
         addChild(gegnerWeapon)
            
         gegnerWeapon.wobble()
@@ -947,11 +948,11 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         if playerHearts <= 0 { battery5.alpha = 1.0} else {battery5.alpha = 0.0}
     }
     func checkGegnerHearts(){
-        if gegnerHearts <= 1000 { batteryG0.alpha = 1.0} else {batteryG0.alpha = 0.0}
-        if gegnerHearts <= 800 { batteryG1.alpha = 1.0} else {batteryG1.alpha = 0.0}
-        if gegnerHearts <= 600 { batteryG2.alpha = 1.0} else {batteryG2.alpha = 0.0}
-        if gegnerHearts <= 400 { batteryG3.alpha = 1.0} else {batteryG3.alpha = 0.0}
-        if gegnerHearts <= 200 { batteryG4.alpha = 1.0} else {batteryG4.alpha = 0.0}
+        if gegnerHearts <= 2000 { batteryG0.alpha = 1.0} else {batteryG0.alpha = 0.0}
+        if gegnerHearts <= 1600 { batteryG1.alpha = 1.0} else {batteryG1.alpha = 0.0}
+        if gegnerHearts <= 1200 { batteryG2.alpha = 1.0} else {batteryG2.alpha = 0.0}
+        if gegnerHearts <= 800 { batteryG3.alpha = 1.0} else {batteryG3.alpha = 0.0}
+        if gegnerHearts <= 400 { batteryG4.alpha = 1.0} else {batteryG4.alpha = 0.0}
         if gegnerHearts <= 0 { batteryG5.alpha = 1.0} else {batteryG5.alpha = 0.0}
     }
     override func update(_ currentTime: TimeInterval) {
