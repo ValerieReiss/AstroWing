@@ -31,7 +31,7 @@ import simd
 class Scene0: SKScene, SKPhysicsContactDelegate {
     let arrayLaser = ["laserBeam1", "laserBeam2", "laserBeam3", "laserBeam4"]
     let arrayFusil = ["fusil00", "fusil00Wblack", "fusil00Wblue", "fusil00Wcyan", "fusil00Wgreen", "fusil00Worange", "fusil00Wpink", "fusil011", "fusil012", "fusil013", "fusil014", "fusil015", "fusil016", "fusil017", "fusil021", "fusil022", "fusil023", "fusil024"]
-    let arrayGegner = ["object10", "object11", "object12H", "object1", "object2", "object3", "object4", "object5", "object6", "object7W", "object8", "object9"]
+    let arrayGegner = ["object10", "scorpio", "sagittarius", "capricorn1", "aquarius1", "pisces", "aries1", "taurus", "gemini1", "cancer1", "lion1", "virgo"]
     var indexGegner = 0
     let player = Player()
     let gegner = Gegner(type: 0)
@@ -353,8 +353,8 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         }
         else if playerLevel == 2 {  // Schütze - Dezember
             gegner.position = CGPoint( x: 2000, y: Int(size.height) - 200)
-            gegner.wobble()
-            gegner.moveHideRight()
+            
+            gegner.sagittarius()
             
             let wait2 = SKAction.wait(forDuration: 8.0)
             let spawn2 = SKAction.run { self.spawnGegnerWeapon2()}
@@ -364,8 +364,8 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         }
         else if playerLevel == 3 { // Steinbock - Januar
             gegner.position = CGPoint( x: 2000, y: Int(size.height) - 100)
-            let gegner2 = SKTexture(imageNamed: "object1")
-            let gegner1 = SKTexture(imageNamed: "object1A")
+            let gegner2 = SKTexture(imageNamed: "capricorn1")
+            let gegner1 = SKTexture(imageNamed: "capricorn2")
             let animation = SKAction.animate(with: [gegner2, gegner1], timePerFrame: 0.2)
             let makeGegner = SKAction.repeatForever(animation)
             gegner.run (makeGegner)
@@ -399,9 +399,9 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         }
         else if playerLevel == 6{ //Widder - April
             gegner.position = CGPoint( x: 1400, y: 1200)
-            let gegner3 = SKTexture(imageNamed: "object4")
-            let gegner2 = SKTexture(imageNamed: "object4W")
-            let gegner1 = SKTexture(imageNamed: "object4X")
+            let gegner3 = SKTexture(imageNamed: "aries1")
+            let gegner2 = SKTexture(imageNamed: "aries2")
+            let gegner1 = SKTexture(imageNamed: "aries3")
             let animation = SKAction.animate(with: [gegner2, gegner1, gegner3], timePerFrame: 0.2)
             let makeGegner = SKAction.repeatForever(animation)
             gegner.run (makeGegner)
@@ -436,11 +436,11 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         }
         else if playerLevel == 9{ // Krebs - Juli
             gegner.position = CGPoint( x: Int.random(in: 500..<1400), y: 1500)
-            /*let gegner2 = SKTexture(imageNamed: "object7")
-            let gegner1 = SKTexture(imageNamed: "object7W")
+            let gegner2 = SKTexture(imageNamed: "cancer1")
+            let gegner1 = SKTexture(imageNamed: "cancer2")
             let animation = SKAction.animate(with: [gegner2, gegner1], timePerFrame: 0.2)
             let makeGegner = SKAction.repeatForever(animation)
-            gegner.run (makeGegner)*/
+            gegner.run (makeGegner)
             gegner.wobblefast()
             gegner.moveCancer()
             
@@ -451,8 +451,8 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         }
         else if playerLevel == 10{ // Löwe - August
             gegner.position = CGPoint( x: Int(size.width)-100, y: Int(size.height)-100)
-            let gegner2 = SKTexture(imageNamed: "object8")
-            let gegner1 = SKTexture(imageNamed: "object8W")
+            let gegner2 = SKTexture(imageNamed: "lion1")
+            let gegner1 = SKTexture(imageNamed: "lion2")
             let animation = SKAction.animate(with: [gegner2, gegner1], timePerFrame: 0.2)
             let makeGegner = SKAction.repeatForever(animation)
             gegner.run (makeGegner)
@@ -715,6 +715,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         let arrayWeapon = ["object10W", "object10X"]
         //SKSpriteNode(imageNamed: arrayWeapon[Int.random(in: 0..<1)])
         gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
+        gegnerWeapon.setScale(0.8)
         addChild(gegnerWeapon)
         
         gegnerWeapon.wobble()
@@ -725,7 +726,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
     func spawnGegnerWeapon1() {
             let gegnerWeapon = GegnerWeapon(type: 1)
             gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
-            gegnerWeapon.setScale(0.5)
+            //gegnerWeapon.setScale(0.5)
             addChild(gegnerWeapon)
             
             gegnerWeapon.wobble()
@@ -739,7 +740,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
             //SKSpriteNode(imageNamed: arrayWeapon[Int.random(in: 0..<2)])
             gegnerWeapon.position = CGPoint(x: Int.random(in: 1500 ..< 1900), y: Int(size.height) + 20)
             
-            gegnerWeapon.setScale(0.7)
+            gegnerWeapon.setScale(0.6)
             addChild(gegnerWeapon)
             
             gegnerWeapon.pfeile()
@@ -749,7 +750,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
     func spawnGegnerWeapon3() {
         let gegnerWeapon = GegnerWeapon(type: 3)
             gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
-            gegnerWeapon.setScale(0.5)
+            //gegnerWeapon.setScale(0.5)
             addChild(gegnerWeapon)
             
             gegnerWeapon.step()
@@ -762,7 +763,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         let xPosition = Int.random(in: 1000 ..< 1600)
             gegnerWeapon.position = CGPoint(x: xPosition, y: Int(size.height) + 100)
            
-            gegnerWeapon.setScale(0.4)
+            //gegnerWeapon.setScale(0.4)
             addChild(gegnerWeapon)
             
             gegnerWeapon.wobbleSanft()
@@ -774,7 +775,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         let gegnerWeapon = GegnerWeapon(type: 5)
             gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
            
-            gegnerWeapon.setScale(0.5)
+            //gegnerWeapon.setScale(0.5)
             addChild(gegnerWeapon)
             
             gegnerWeapon.rotateFull()
@@ -787,7 +788,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
             //let gegnerWeapon = SKSpriteNode(imageNamed: "object4")
             gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
            
-            gegnerWeapon.setScale(0.5)
+            //gegnerWeapon.setScale(0.5)
             addChild(gegnerWeapon)
             
             gegnerWeapon.wobble()
@@ -800,7 +801,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
             //let gegnerWeapon = SKSpriteNode(imageNamed: "object5")
             gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
             
-            gegnerWeapon.setScale(0.5)
+            //gegnerWeapon.setScale(0.5)
             addChild(gegnerWeapon)
             
             gegnerWeapon.step()
@@ -813,10 +814,10 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
             //let gegnerWeapon = SKSpriteNode(imageNamed: "object6W1")
             gegnerWeapon.position = CGPoint( x: 150, y: Int(size.height) - 650)
            
-            gegnerWeapon.setScale(0.6)
+            //gegnerWeapon.setScale(0.6)
             addChild(gegnerWeapon)
             
-        let gegnerWeapon1 = SKSpriteNode(imageNamed: "object6W2")
+        let gegnerWeapon1 = SKSpriteNode(imageNamed: "gemini2")
                 gegnerWeapon1.zPosition = 2
                 gegnerWeapon1.name = "gegner"
                 gegnerWeapon1.position = CGPoint( x: Int(size.width)-150, y: Int(size.height) - 650)
@@ -833,21 +834,44 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
                 path.addCurve(to: CGPoint(x: 450, y: 300), controlPoint1: CGPoint(x: 100, y: 100), controlPoint2: CGPoint(x: 300, y: -200))
                 let movement = SKAction.follow(path.cgPath, asOffset: true, orientToPath: true, speed: 300)
                 let sequence = SKAction.sequence([movement, .removeFromParent()])
-                gegnerWeapon.run (sequence)
+                gegnerWeapon1.run (sequence)
             
                 let path1 = UIBezierPath()
                 path1.move(to: .zero)
                 path1.addCurve(to: CGPoint(x: -500, y: 300), controlPoint1: CGPoint(x: -200, y: 200), controlPoint2: CGPoint(x: -400, y: -200))
                 let movement1 = SKAction.follow(path1.cgPath, asOffset: true, orientToPath: true, speed: 300)
                
-            }
+        let gegnerWeapon2 = SKSpriteNode(imageNamed: "gemini3")
+                gegnerWeapon2.zPosition = 2
+                gegnerWeapon2.name = "gegner"
+                gegnerWeapon2.position = CGPoint( x: 2000, y: Int(size.height) - 650)
+                gegnerWeapon2.physicsBody = SKPhysicsBody(texture: gegnerWeapon1.texture!, size: gegnerWeapon1.texture!.size())
+                gegnerWeapon2.physicsBody?.categoryBitMask = CollisionType.gegnerWeapon1.rawValue
+                gegnerWeapon2.physicsBody?.collisionBitMask = CollisionType.player.rawValue | CollisionType.laserBeam.rawValue
+                gegnerWeapon2.physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.laserBeam.rawValue
+                gegnerWeapon2.physicsBody?.isDynamic = false
+                gegnerWeapon2.setScale(0.6)
+                addChild(gegnerWeapon2)
+            
+                let path2 = UIBezierPath()
+                path2.move(to: .zero)
+                path2.addCurve(to: CGPoint(x: 450, y: 300), controlPoint1: CGPoint(x: 100, y: 100), controlPoint2: CGPoint(x: 300, y: -200))
+                let movement2 = SKAction.follow(path.cgPath, asOffset: true, orientToPath: true, speed: 300)
+                let sequence2 = SKAction.sequence([movement2, .removeFromParent()])
+                gegnerWeapon2.run (sequence2)
+            
+                let path3 = UIBezierPath()
+                path3.move(to: .zero)
+                path3.addCurve(to: CGPoint(x: -500, y: 300), controlPoint1: CGPoint(x: -200, y: 200), controlPoint2: CGPoint(x: -400, y: -200))
+                let movement3 = SKAction.follow(path3.cgPath, asOffset: true, orientToPath: true, speed: 300)
+    }
     
     //Krebs
     func spawnGegnerWeapon9() {
         let gegnerWeapon = GegnerWeapon(type: 9)
         //let gegnerWeapon = SKSpriteNode(imageNamed: "object7")
         gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
-        gegnerWeapon.setScale(0.5)
+        //gegnerWeapon.setScale(0.5)
         addChild(gegnerWeapon)
         
         gegnerWeapon.wobble()
@@ -859,7 +883,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         let gegnerWeapon = GegnerWeapon(type: 10)
         //let gegnerWeapon = SKSpriteNode(imageNamed: "object8")
         gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
-        gegnerWeapon.setScale(0.3)
+        //gegnerWeapon.setScale(0.3)
         addChild(gegnerWeapon)
             
         gegnerWeapon.wobble()

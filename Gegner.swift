@@ -10,7 +10,7 @@ import SpriteKit
 import simd
 
 class Gegner: SKSpriteNode{
-    let arrayGegner = ["object10", "object11", "object12H", "object1", "object2", "object3", "object4", "object5", "object6", "object7W", "object8", "object9"]
+    let arrayGegner = ["object10", "scorpio", "sagittarius", "capricorn1", "aquarius1", "pisces", "aries1", "taurus", "gemini1", "cancer1", "lion1", "virgo"]
     var type: Int
     
     init(type: Int){
@@ -18,20 +18,20 @@ class Gegner: SKSpriteNode{
         let texture = SKTexture(imageNamed: arrayGegner[type])
         
         super.init(texture: texture, color: .white, size: texture.size())
+        //self.setScale(0.5)
         
         self.name = "gegner"
         self.zPosition = 2
        
         self.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
         self.physicsBody?.allowsRotation = false
-        self.setScale(0.05)
         
         self.physicsBody?.isDynamic = true
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.contactTestBitMask = ColliderType.player.rawValue | ColliderType.laserBeam.rawValue
         self.physicsBody?.categoryBitMask  = ColliderType.gegner.rawValue
         self.physicsBody?.collisionBitMask = ColliderType.gegner.rawValue
-       
+        //self.setScale(0.5)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -121,13 +121,14 @@ class Gegner: SKSpriteNode{
     }
     func moveHideLeft(){}
     
-    func moveHideRight(){
+    func sagittarius(){
         let fromright = SKAction.moveTo(x: CGFloat.random(in: 1400..<1600), duration: 3.0)
         fromright.timingFunction = {time in return simd_smoothstep(0, 1, time) }
-        let back = SKAction.moveTo(x: CGFloat.random(in: 2000 ..< 2400), duration: 3.0)
+        let turnface = SKAction.scaleX(to: -1, duration: 0.4)
+        let turnback = SKAction.scaleX(to: 1, duration: 0.4)
+        let back = SKAction.moveTo(x: CGFloat.random(in: 2300 ..< 2400), duration: 3.0)
         back.timingFunction = {time in return simd_smoothstep(0, 1, time) }
-        //let spawnWeapon = SKAction.run { self.spawnGegnerWeapon() }
-        let sequence = SKAction.sequence([fromright, /*spawnWeapon, spawnWeapon,*/ back])
+        let sequence = SKAction.sequence([fromright, turnface, back, turnback])
         run(SKAction.repeatForever(sequence))
     }
     func moveDown() {
@@ -169,11 +170,13 @@ class Gegner: SKSpriteNode{
         
     }
     func moveCancer() {
-        let down = SKAction.moveTo(y: 550, duration: 3.0)
+        let down = SKAction.moveTo(y: 700, duration: 3.0)
         down.timingFunction = {time in return simd_smoothstep(0, 1, time) }
         let back2 = SKAction.moveTo(y: 1500, duration: 3.0)
-        let changeposition = SKAction.moveTo(x: CGFloat.random(in: 500..<2400), duration: 5.0)
-        let sequence = SKAction.sequence([down, back2, changeposition])
+        let changeposition = SKAction.moveTo(x: CGFloat.random(in: 800..<2100), duration: 5.0)
+        let changeposition1 = SKAction.moveTo(x: CGFloat.random(in: 800..<2100), duration: 5.0)
+        let changeposition2 = SKAction.moveTo(x: CGFloat.random(in: 800..<2100), duration: 5.0)
+        let sequence = SKAction.sequence([down, back2, changeposition, down, back2, changeposition1, down, back2, changeposition2])
         run(SKAction.repeatForever(sequence))
     }
     

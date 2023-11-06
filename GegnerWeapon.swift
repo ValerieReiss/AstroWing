@@ -12,7 +12,7 @@ import simd
 //["object10W", "object10X"]
 
 class GegnerWeapon: SKSpriteNode{
-    let arrayGegnerWeapon = ["object10W", "object11", "object12X", "object1", "object2W", "object3", "object4", "object5", "object6", "object7W", "object8", "objectCoinGreen"]
+    let arrayGegnerWeapon = ["object10W", "scorpio", "object12X", "capricorn1", "aquarius2", "pisces", "aries1", "taurus", "gemini2", "cancer2", "lion1", "objectCoinGreen"]
     var type: Int
     
     init(type: Int){
@@ -24,13 +24,13 @@ class GegnerWeapon: SKSpriteNode{
         
         self.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
         self.physicsBody?.allowsRotation = false
-        self.setScale(0.7)
+        
         self.physicsBody?.isDynamic = true
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.contactTestBitMask = ColliderType.player.rawValue | ColliderType.laserBeam.rawValue
         self.physicsBody?.categoryBitMask  = ColliderType.gegnerWeapon.rawValue
         self.physicsBody?.collisionBitMask = ColliderType.gegnerWeapon.rawValue
-        self.setScale(0.8)
+        //self.setScale(1.0)
     }
     
     required init?(coder aDecoder: NSCoder) {
