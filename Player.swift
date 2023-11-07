@@ -14,10 +14,11 @@ struct PhysicsCategory {
     static let player         : UInt32 = 0x1 << 1
     static let laserBeam      : UInt32 = 0x1 << 2
     static let gegner         : UInt32 = 0x1 << 4
-    static let gegnerWeapon   : UInt32 = 0x1 << 8
-    static let gegnerWeapon1  : UInt32 = 0x1 << 16
+    static let weapon1        : UInt32 = 0x1 << 8
+    static let weapon2        : UInt32 = 0x1 << 16
     static let knochen        : UInt32 = 0x1 << 32
     static let zange          : UInt32 = 0x1 << 64
+    static let weapon3        : UInt32 = 0x1 << 128
 }
 
 class Player: SKSpriteNode{

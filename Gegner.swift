@@ -10,7 +10,7 @@ import SpriteKit
 import simd
 
 class Gegner: SKSpriteNode{
-    let arrayGegner = ["object10", "scorpio", "sagittarius", "capricorn1", "aquarius1", "pisces", "aries1", "taurus", "gemini1", "cancer1", "lion1", "virgo"]
+    let arrayGegner = ["libra", "scorpio", "sagittarius", "capricorn1", "aquarius1", "pisces", "aries1", "taurus", "gemini1", "cancer1", "lion1", "virgo"]
     var type: Int
     
     init(type: Int){
@@ -169,7 +169,17 @@ class Gegner: SKSpriteNode{
         run(SKAction.repeatForever(sequence))
         
     }
-    func moveCancer() {
+    
+    func taurus() {
+        let down = SKAction.moveTo(y: 0, duration: 7.85)
+        let hideleft = SKAction.moveTo(x: 0, duration: 0.05)
+        let hideup = SKAction.moveTo(y: 1400, duration: 0.05)
+        let changeposition = SKAction.moveTo(x: 1000, duration: 0.05)
+        let sequence = SKAction.sequence([down, hideleft, hideup, changeposition])
+        run(SKAction.repeatForever(sequence))
+    }
+    
+    func cancer() {
         let down = SKAction.moveTo(y: 700, duration: 3.0)
         down.timingFunction = {time in return simd_smoothstep(0, 1, time) }
         let back2 = SKAction.moveTo(y: 1500, duration: 3.0)
