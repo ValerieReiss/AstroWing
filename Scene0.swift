@@ -379,19 +379,30 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
 
         }
         else if playerLevel == 3 { // Steinbock - Januar
-            gegner.position = CGPoint( x: 2000, y: Int(size.height) - 100)
+            gegner.position = CGPoint( x: 400, y: 1200)
             let gegner2 = SKTexture(imageNamed: "capricorn1")
             let gegner1 = SKTexture(imageNamed: "capricorn2")
             let animation = SKAction.animate(with: [gegner2, gegner1], timePerFrame: 0.2)
             let makeGegner = SKAction.repeatForever(animation)
+            
             gegner.run (makeGegner)
             gegner.step()
-            gegner.moveToPlayerRight()
+            gegner.capricorn()
             
-            let wait2 = SKAction.wait(forDuration: 8.0)
-            let spawn2 = SKAction.run { self.spawnCapricornWeapon1()}
+            let wait1 = SKAction.wait(forDuration: 5.0)
+            let spawn1 = SKAction.run { self.spawnCapricornWeapon1()}
+            let sequence1 = SKAction.sequence([wait1, spawn1])
+            run(SKAction.repeatForever(sequence1))
+            
+            let wait2 = SKAction.wait(forDuration: 6.0)
+            let spawn2 = SKAction.run { self.spawnCapricornWeapon2()}
             let sequence2 = SKAction.sequence([wait2, spawn2])
             run(SKAction.repeatForever(sequence2))
+            
+            let wait3 = SKAction.wait(forDuration: 7.0)
+            let spawn3 = SKAction.run { self.spawnCapricornWeapon3()}
+            let sequence3 = SKAction.sequence([wait3, spawn3])
+            run(SKAction.repeatForever(sequence3))
         }
         else if playerLevel == 4{ // Wassermann - Februar
             gegner.position = CGPoint( x: 0, y: 950)
@@ -464,9 +475,14 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
             gegner.wobble()
             gegner.dance()
             
-            let wait2 = SKAction.wait(forDuration: 8.0)
-            let spawn3 = SKAction.run { self.spawnGeminiWeapon1()}
-            let sequence2 = SKAction.sequence([wait2, spawn3])
+            let wait1 = SKAction.wait(forDuration: 5.0)
+            let spawn1 = SKAction.run { self.spawnGeminiWeapon1()}
+            let sequence1 = SKAction.sequence([wait1, spawn1])
+            run(SKAction.repeatForever(sequence1))
+            
+            let wait2 = SKAction.wait(forDuration: 5.0)
+            let spawn2 = SKAction.run { self.spawnGeminiWeapon2()}
+            let sequence2 = SKAction.sequence([wait2, spawn2])
             run(SKAction.repeatForever(sequence2))
         }
         else if playerLevel == 9{ // Krebs - Juli
@@ -890,12 +906,32 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
     //Steinbock
     func spawnCapricornWeapon1() {
         let gegnerWeapon = Weapon1(type: 3)
-            gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
-            //gegnerWeapon.setScale(0.5)
+            gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 500), y: Int(size.height) + 100)
+            gegnerWeapon.setScale(0.5)
             addChild(gegnerWeapon)
             
-            gegnerWeapon.step()
-            gegnerWeapon.randomCoin()
+            gegnerWeapon.rotateFull()
+            gegnerWeapon.runterfloaten()
+        }
+    
+    func spawnCapricornWeapon2() {
+        let gegnerWeapon = Weapon2(type: 3)
+            gegnerWeapon.position = CGPoint(x: Int.random(in: 800 ..< 900), y: Int(size.height) + 100)
+            gegnerWeapon.setScale(0.5)
+            addChild(gegnerWeapon)
+            
+            gegnerWeapon.rotateFullreversed()
+            gegnerWeapon.runterfloaten()
+        }
+    
+    func spawnCapricornWeapon3() {
+        let gegnerWeapon = Weapon3(type: 3)
+            gegnerWeapon.position = CGPoint(x: Int.random(in: 1700 ..< 2000), y: Int(size.height) + 100)
+            gegnerWeapon.setScale(0.5)
+            addChild(gegnerWeapon)
+            
+            gegnerWeapon.rotateFull()
+            gegnerWeapon.runterfloaten()
         }
     
     //Wassermann
@@ -970,59 +1006,20 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
     //ZWillinge
     func spawnGeminiWeapon1() {
         let gegnerWeapon = Weapon1(type: 8)
-            //let gegnerWeapon = SKSpriteNode(imageNamed: "object6W1")
-            gegnerWeapon.position = CGPoint( x: 150, y: Int(size.height) - 650)
-           
-            //gegnerWeapon.setScale(0.6)
+            gegnerWeapon.position = CGPoint( x: 150, y: 800)
+            gegnerWeapon.setScale(0.8)
             addChild(gegnerWeapon)
-            /*
-        let gegnerWeapon1 = SKSpriteNode(imageNamed: "gemini2")
-                gegnerWeapon1.zPosition = 2
-                gegnerWeapon1.name = "gegner"
-                gegnerWeapon1.position = CGPoint( x: Int(size.width)-150, y: Int(size.height) - 650)
-                gegnerWeapon1.physicsBody = SKPhysicsBody(texture: gegnerWeapon1.texture!, size: gegnerWeapon1.texture!.size())
-                gegnerWeapon1.physicsBody?.categoryBitMask = CollisionType.weapon1.rawValue
-                gegnerWeapon1.physicsBody?.collisionBitMask = CollisionType.player.rawValue | CollisionType.laserBeam.rawValue
-                gegnerWeapon1.physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.laserBeam.rawValue
-                gegnerWeapon1.physicsBody?.isDynamic = false
-                gegnerWeapon1.setScale(0.6)
-                addChild(gegnerWeapon1)
-            
-                let path = UIBezierPath()
-                path.move(to: .zero)
-                path.addCurve(to: CGPoint(x: 450, y: 300), controlPoint1: CGPoint(x: 100, y: 100), controlPoint2: CGPoint(x: 300, y: -200))
-                let movement = SKAction.follow(path.cgPath, asOffset: true, orientToPath: true, speed: 300)
-                let sequence = SKAction.sequence([movement, .removeFromParent()])
-                gegnerWeapon1.run (sequence)
-            
-                let path1 = UIBezierPath()
-                path1.move(to: .zero)
-                path1.addCurve(to: CGPoint(x: -500, y: 300), controlPoint1: CGPoint(x: -200, y: 200), controlPoint2: CGPoint(x: -400, y: -200))
-                let movement1 = SKAction.follow(path1.cgPath, asOffset: true, orientToPath: true, speed: 300)
-               
-        let gegnerWeapon2 = SKSpriteNode(imageNamed: "gemini3")
-                gegnerWeapon2.zPosition = 2
-                gegnerWeapon2.name = "gegner"
-                gegnerWeapon2.position = CGPoint( x: 2000, y: Int(size.height) - 650)
-                gegnerWeapon2.physicsBody = SKPhysicsBody(texture: gegnerWeapon1.texture!, size: gegnerWeapon1.texture!.size())
-                gegnerWeapon2.physicsBody?.categoryBitMask = CollisionType.gegnerWeapon1.rawValue
-                gegnerWeapon2.physicsBody?.collisionBitMask = CollisionType.player.rawValue | CollisionType.laserBeam.rawValue
-                gegnerWeapon2.physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.laserBeam.rawValue
-                gegnerWeapon2.physicsBody?.isDynamic = false
-                gegnerWeapon2.setScale(0.6)
-                addChild(gegnerWeapon2)
-            
-                let path2 = UIBezierPath()
-                path2.move(to: .zero)
-                path2.addCurve(to: CGPoint(x: 450, y: 300), controlPoint1: CGPoint(x: 100, y: 100), controlPoint2: CGPoint(x: 300, y: -200))
-                let movement2 = SKAction.follow(path.cgPath, asOffset: true, orientToPath: true, speed: 300)
-                let sequence2 = SKAction.sequence([movement2, .removeFromParent()])
-                gegnerWeapon2.run (sequence2)
-            
-                let path3 = UIBezierPath()
-                path3.move(to: .zero)
-                path3.addCurve(to: CGPoint(x: -500, y: 300), controlPoint1: CGPoint(x: -200, y: 200), controlPoint2: CGPoint(x: -400, y: -200))
-                let movement3 = SKAction.follow(path3.cgPath, asOffset: true, orientToPath: true, speed: 300)*/
+        gegnerWeapon.wobble()
+        gegnerWeapon.gemini1()
+    }
+    func spawnGeminiWeapon2() {
+        let gegnerWeapon = Weapon2(type: 8)
+            gegnerWeapon.position = CGPoint( x: 2000, y: 800)
+            gegnerWeapon.setScale(0.8)
+            addChild(gegnerWeapon)
+        gegnerWeapon.wobble()
+        gegnerWeapon.gemini2()
+        
     }
     
     //Krebs

@@ -12,7 +12,7 @@ import simd
 //["object10W", "object10X"]
 
 class Weapon1: SKSpriteNode{
-    let arrayWeapon1 = ["object10W", "weaponScorpio1", "object12X", "capricorn1", "aquarius2", "pisces", "weaponAries1", "weaponTaurus1", "gemini2", "weaponCancer1", "lion1", "objectCoinGreen"]
+    let arrayWeapon1 = ["object10W", "weaponScorpio1", "object12X", "weaponCapricorn1", "aquarius2", "pisces", "weaponAries1", "weaponTaurus1", "gemini2", "weaponCancer1", "lion1", "objectCoinGreen"]
     var type: Int
     
     init(type: Int){
@@ -62,6 +62,10 @@ class Weapon1: SKSpriteNode{
         let turn = SKAction.rotate(byAngle: 3.14*2, duration: 1.5)
         run(SKAction.repeatForever(turn))
     }
+    func rotateFullreversed(){
+        let turn = SKAction.rotate(byAngle: -3.14*2, duration: 1.5)
+        run(SKAction.repeatForever(turn))
+    }
     
     func randomCoin(){
         let destination = CGPoint(x: Int.random(in: 300 ..< 2300), y: -100)
@@ -104,4 +108,11 @@ class Weapon1: SKSpriteNode{
         run(SKAction.repeatForever(wobble))
     }
     
+    func gemini1(){
+        let mitte = SKAction.moveTo(x: 1200, duration: 2.0)
+        let links = SKAction.moveTo(x: 500, duration: 2.0)
+        let raus = SKAction.moveTo(x: 0, duration: 2.0)
+        let sequence = SKAction.sequence([mitte,links,mitte,raus, .removeFromParent()])
+        run (sequence)
+    }
 }

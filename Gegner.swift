@@ -18,7 +18,6 @@ class Gegner: SKSpriteNode{
         let texture = SKTexture(imageNamed: arrayGegner[type])
         
         super.init(texture: texture, color: .white, size: texture.size())
-        //self.setScale(0.5)
         
         self.name = "gegner"
         self.zPosition = 2
@@ -31,7 +30,7 @@ class Gegner: SKSpriteNode{
         self.physicsBody?.contactTestBitMask = ColliderType.player.rawValue | ColliderType.laserBeam.rawValue
         self.physicsBody?.categoryBitMask  = ColliderType.gegner.rawValue
         self.physicsBody?.collisionBitMask = ColliderType.gegner.rawValue
-        //self.setScale(0.5)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -131,6 +130,21 @@ class Gegner: SKSpriteNode{
         let sequence = SKAction.sequence([fromright, turnface, back, turnback])
         run(SKAction.repeatForever(sequence))
     }
+    
+    func capricorn(){
+        let fromleft = SKAction.move(to: CGPoint (x: 2000, y: 1200), duration: 2.0)
+        let fromright = SKAction.move(to: CGPoint(x: 500, y: 900), duration: 2.0)
+        let turnface = SKAction.scaleX(to: -1, duration: 0.2)
+        let turnback = SKAction.scaleX(to: 1, duration: 0.2)
+        let nochmalleft = SKAction.move(to: CGPoint(x: 1800,y: 800), duration: 2.0)
+        let nochmalright = SKAction.move(to: CGPoint(x: 500, y: 700), duration: 2.0)
+        let weggehenlinks = SKAction.move(to: CGPoint(x: 0, y: 600), duration: 2.0)
+        let weggehenhoch = SKAction.move(to: CGPoint(x: 0, y: 1200), duration: 2.0)
+        let sequence = SKAction.sequence([turnface, fromleft, turnback, fromright, turnface, nochmalleft, turnback, nochmalright,
+                                        weggehenlinks, weggehenhoch ])
+        run(SKAction.repeatForever(sequence))
+    }
+    
     func moveDown() {
         let mitte = SKAction.move(to: CGPoint(x: CGFloat.random(in: 1200 ..< 1300), y: 1000), duration: 6.0)
         mitte.timingFunction = {time in return simd_smoothstep(0, 1, time) }
