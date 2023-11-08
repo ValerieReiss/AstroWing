@@ -322,6 +322,8 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         player.position = CGPoint(x: 1000, y: 400)
         addChild(player)
         
+// music        run("astrowing bg2")
+        
         //Gegner
         let gegner = Gegner(type: playerLevel)
         //gegner.setScale(0.8)
@@ -413,20 +415,28 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         }
         else if playerLevel == 6{ //Widder - April
             gegner.position = CGPoint( x: 1400, y: 1200)
-            let gegner3 = SKTexture(imageNamed: "aries1")
+            let gegner1 = SKTexture(imageNamed: "aries1")
             let gegner2 = SKTexture(imageNamed: "aries2")
-            let gegner1 = SKTexture(imageNamed: "aries3")
-            let animation = SKAction.animate(with: [gegner2, gegner1, gegner3], timePerFrame: 0.2)
+            let animation = SKAction.animate(with: [gegner1, gegner2], timePerFrame: 0.2)
             let makeGegner = SKAction.repeatForever(animation)
             gegner.run (makeGegner)
-                    
             gegner.step()
             gegner.moveToPlayerRighttoLeft()
             
-            let wait2 = SKAction.wait(forDuration: 8.0)
-            let spawn3 = SKAction.run { self.spawnAriesWeapon1()}
-            let sequence2 = SKAction.sequence([wait2, spawn3])
+            let wait1 = SKAction.wait(forDuration: 5.0)
+            let spawn1 = SKAction.run { self.spawnAriesWeapon1()}
+            let sequence1 = SKAction.sequence([wait1, spawn1])
+            run(SKAction.repeatForever(sequence1))
+            
+            let wait2 = SKAction.wait(forDuration: 6.0)
+            let spawn2 = SKAction.run { self.spawnAriesWeapon2()}
+            let sequence2 = SKAction.sequence([wait2, spawn2])
             run(SKAction.repeatForever(sequence2))
+            
+            let wait3 = SKAction.wait(forDuration: 7.0)
+            let spawn3 = SKAction.run { self.spawnAriesWeapon3()}
+            let sequence3 = SKAction.sequence([wait3, spawn3])
+            run(SKAction.repeatForever(sequence3))
         }
         else if playerLevel == 7{ //Stier - Mai
             gegner.position = CGPoint( x: 1000, y: 1300)
@@ -465,14 +475,25 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
             let gegner1 = SKTexture(imageNamed: "cancer2")
             let animation = SKAction.animate(with: [gegner2, gegner1], timePerFrame: 0.2)
             let makeGegner = SKAction.repeatForever(animation)
+            gegner.setScale(0.65)
             gegner.run (makeGegner)
             gegner.wobblefast()
             gegner.cancer()
             
-            let wait2 = SKAction.wait(forDuration: 8.0)
-            let spawn2 = SKAction.run { self.spawnCancerWeapon1()}
+            let wait1 = SKAction.wait(forDuration: 6.0)
+            let spawn1 = SKAction.run { self.spawnCancerWeapon1()}
+            let sequence1 = SKAction.sequence([wait1, spawn1])
+            run(SKAction.repeatForever(sequence1))
+            
+            let wait2 = SKAction.wait(forDuration: 5.0)
+            let spawn2 = SKAction.run { self.spawnCancerWeapon2()}
             let sequence2 = SKAction.sequence([wait2, spawn2])
             run(SKAction.repeatForever(sequence2))
+            
+            let wait3 = SKAction.wait(forDuration: 7.0)
+            let spawn3 = SKAction.run { self.spawnCancerWeapon3()}
+            let sequence3 = SKAction.sequence([wait3, spawn3])
+            run(SKAction.repeatForever(sequence3))
         }
         else if playerLevel == 10{ // Löwe - August
             gegner.position = CGPoint( x: Int(size.width)-100, y: Int(size.height)-100)
@@ -905,14 +926,27 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
     //Widder
     func spawnAriesWeapon1() {
         let gegnerWeapon = Weapon1(type: 6)
-            //let gegnerWeapon = SKSpriteNode(imageNamed: "object4")
-            gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
-           
-            //gegnerWeapon.setScale(0.5)
+            gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 500), y: Int(size.height) + 100)
+            gegnerWeapon.setScale(0.5)
             addChild(gegnerWeapon)
-            
-            gegnerWeapon.wobble()
-            gegnerWeapon.randomCoin()
+            gegnerWeapon.tremble()
+            gegnerWeapon.runterfloaten()
+        }
+    func spawnAriesWeapon2() {
+        let gegnerWeapon = Weapon1(type: 6)
+            gegnerWeapon.position = CGPoint(x: Int.random(in: 500 ..< 600), y: Int(size.height) + 100)
+            gegnerWeapon.setScale(0.7)
+            addChild(gegnerWeapon)
+            gegnerWeapon.tremble()
+            gegnerWeapon.runterfloaten()
+        }
+    func spawnAriesWeapon3() {
+        let gegnerWeapon = Weapon1(type: 6)
+            gegnerWeapon.position = CGPoint(x: Int.random(in: 1100 ..< 1200), y: Int(size.height) + 100)
+            gegnerWeapon.setScale(0.6)
+            addChild(gegnerWeapon)
+            gegnerWeapon.tremble()
+            gegnerWeapon.runterfloaten()
         }
     
     //Stier
@@ -994,13 +1028,32 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
     //Krebs
     func spawnCancerWeapon1() {
         let gegnerWeapon = Weapon1(type: 9)
-        //let gegnerWeapon = SKSpriteNode(imageNamed: "object7")
-        gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
-        //gegnerWeapon.setScale(0.5)
+        gegnerWeapon.position = CGPoint(x: Int.random(in: 500 ..< 700), y: Int(size.height) + 100)
+        gegnerWeapon.setScale(0.5)
         addChild(gegnerWeapon)
         
         gegnerWeapon.wobble()
-        gegnerWeapon.randomCoin()
+        gegnerWeapon.runterfloaten()
+    }
+    
+    func spawnCancerWeapon2(){
+        let gegnerWeapon = Weapon2(type: 9)
+        gegnerWeapon.position = CGPoint(x: Int.random(in: 800 ..< 1000), y: Int(size.height) + 100)
+        gegnerWeapon.setScale(0.5)
+        addChild(gegnerWeapon)
+        
+        gegnerWeapon.wobble()
+        gegnerWeapon.runterfloaten()
+    }
+    
+    func spawnCancerWeapon3(){
+        let gegnerWeapon = Weapon3(type: 9)
+        gegnerWeapon.position = CGPoint(x: Int.random(in: 1700 ..< 1800), y: Int(size.height) + 100)
+        gegnerWeapon.setScale(0.5)
+        addChild(gegnerWeapon)
+        
+        gegnerWeapon.wobble()
+        gegnerWeapon.runterfloaten()
     }
     
     //Löwe

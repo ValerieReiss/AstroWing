@@ -12,7 +12,7 @@ import simd
 //["object10W", "object10X"]
 
 class Weapon3: SKSpriteNode{
-    let arrayWeapon3 = ["object10W", "weaponScorpio3", "object12X", "capricorn1", "aquarius2", "pisces", "aries1", "taurus", "gemini2", "cancer2", "lion1", "objectCoinGreen"]
+    let arrayWeapon3 = ["object10W", "weaponScorpio3", "object12X", "capricorn1", "aquarius2", "pisces", "weaponAries1", "taurus", "gemini2", "weaponCancer3", "lion1", "objectCoinGreen"]
     var type: Int
     
     init(type: Int){
@@ -97,4 +97,10 @@ class Weapon3: SKSpriteNode{
         run(animation)
     }
     
+    func tremble(){
+        let left = SKAction.rotate(byAngle: 0.2, duration: 0.1)
+        let right = SKAction.rotate(byAngle: -0.2, duration: 0.1)
+        let wobble = SKAction.sequence([left, right])
+        run(SKAction.repeatForever(wobble))
+    }
 }
