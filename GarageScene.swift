@@ -357,7 +357,7 @@ class GarageScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch: AnyObject in touches {
+        for _: AnyObject in touches {
             guard var touch = touches.first else {return}
             touch = (touches.first as UITouch?)!
             let location = touch.location(in: self)

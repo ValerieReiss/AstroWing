@@ -12,7 +12,7 @@ import simd
 //["object10W", "object10X"]
 
 class Weapon2: SKSpriteNode{
-    let arrayWeapon2 = ["object10W", "weaponScorpio2", "object12X", "weaponCapricorn2", "aquarius2", "pisces", "weaponAries1", "weaponTaurus2", "gemini3", "weaponCancer2", "lion1", "objectCoinGreen"]
+    let arrayWeapon2 = ["object10X", "weaponScorpio2", "object12X", "weaponCapricorn2", "weaponAquarius2", "pisces", "weaponAries1", "weaponTaurus2", "gemini3", "weaponCancer2", "lion1", "objectCoinGreen"]
     var type: Int
     
     init(type: Int){

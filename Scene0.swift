@@ -333,22 +333,32 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         let sequence = SKAction.sequence([wait1, spawn])
         run(SKAction.repeat(sequence, count: 1))
         
-        let weapon1 = Weapon1(type: playerLevel)
+        /*let weapon1 = Weapon1(type: playerLevel)
         weapon1.zPosition = 2
-        weapon1.name = "gegnerWeapon"
+        weapon1.name = "gegnerWeapon"*/
         
         if playerLevel == 0 {   // Waage - Oktober
             gegner.position = CGPoint( x: 0, y: Int(size.height) - 150)
+            gegner.setScale(0.7)
             gegner.wobble()
             gegner.moveAlong()
             
-            let wait = SKAction.wait(forDuration: 8.0)
+            let wait = SKAction.wait(forDuration: 5.0)
             let spawn = SKAction.run { self.spawnLibraWeapon1()}
             let sequence = SKAction.sequence([wait, spawn])
             run(SKAction.repeatForever(sequence))
+            let wait2 = SKAction.wait(forDuration: 6.0)
+            let spawn2 = SKAction.run { self.spawnLibraWeapon2()}
+            let sequence2 = SKAction.sequence([wait2, spawn2])
+            run(SKAction.repeatForever(sequence2))
+            let wait3 = SKAction.wait(forDuration: 7.0)
+            let spawn3 = SKAction.run { self.spawnLibraWeapon3()}
+            let sequence3 = SKAction.sequence([wait3, spawn3])
+            run(SKAction.repeatForever(sequence3))
         }
         else if playerLevel == 1 { // Skorpion - November
             gegner.position = CGPoint( x: 100, y: Int(size.height) - 150)
+            gegner.setScale(0.7)
             gegner.rotate()
             gegner.moveToPlayerLeft()
             
@@ -369,13 +379,24 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         }
         else if playerLevel == 2 {  // Schütze - Dezember
             gegner.position = CGPoint( x: 2000, y: Int(size.height) - 200)
+            gegner.setScale(0.7)
             
             gegner.sagittarius()
             
-            let wait2 = SKAction.wait(forDuration: 8.0)
-            let spawn2 = SKAction.run { self.spawnSagittariusWeapon1()}
+            let wait1 = SKAction.wait(forDuration: 6.0)
+            let spawn1 = SKAction.run { self.spawnSagittariusWeapon1()}
+            let sequence1 = SKAction.sequence([wait1, spawn1])
+            run(SKAction.repeatForever(sequence1))
+            
+            let wait2 = SKAction.wait(forDuration: 7.0)
+            let spawn2 = SKAction.run { self.spawnSagittariusWeapon2()}
             let sequence2 = SKAction.sequence([wait2, spawn2])
             run(SKAction.repeatForever(sequence2))
+            
+            let wait3 = SKAction.wait(forDuration: 8.0)
+            let spawn3 = SKAction.run { self.spawnSagittariusWeapon3()}
+            let sequence3 = SKAction.sequence([wait3, spawn3])
+            run(SKAction.repeatForever(sequence3))
 
         }
         else if playerLevel == 3 { // Steinbock - Januar
@@ -384,8 +405,9 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
             let gegner1 = SKTexture(imageNamed: "capricorn2")
             let animation = SKAction.animate(with: [gegner2, gegner1], timePerFrame: 0.2)
             let makeGegner = SKAction.repeatForever(animation)
-            
             gegner.run (makeGegner)
+            gegner.setScale(0.7)
+            
             gegner.step()
             gegner.capricorn()
             
@@ -406,16 +428,27 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         }
         else if playerLevel == 4{ // Wassermann - Februar
             gegner.position = CGPoint( x: 0, y: 950)
-            gegner.wobble()
-            gegner.moveDown()
+            gegner.setScale(0.6)
+            gegner.aquarius()
             
-            let wait2 = SKAction.wait(forDuration: 8.0)
-            let spawn2 = SKAction.run { self.spawnAquariusWeapon1()}
+            let wait1 = SKAction.wait(forDuration: 5.0)
+            let spawn1 = SKAction.run { self.spawnAquariusWeapon1()}
+            let sequence1 = SKAction.sequence([wait1, spawn1])
+            run(SKAction.repeatForever(sequence1))
+            
+            let wait2 = SKAction.wait(forDuration: 6.0)
+            let spawn2 = SKAction.run { self.spawnAquariusWeapon2()}
             let sequence2 = SKAction.sequence([wait2, spawn2])
             run(SKAction.repeatForever(sequence2))
+            
+            let wait3 = SKAction.wait(forDuration: 7.0)
+            let spawn3 = SKAction.run { self.spawnAquariusWeapon3()}
+            let sequence3 = SKAction.sequence([wait3, spawn3])
+            run(SKAction.repeatForever(sequence3))
         }
         else if playerLevel == 5{ //Fische - März
             gegner.position = CGPoint( x: Int.random(in: 200 ..< 2400), y: Int(size.height))
+            gegner.setScale(0.7)
             gegner.rotateFull()
             gegner.moveToPlayer()
             
@@ -426,6 +459,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         }
         else if playerLevel == 6{ //Widder - April
             gegner.position = CGPoint( x: 1400, y: 1200)
+            gegner.setScale(0.7)
             let gegner1 = SKTexture(imageNamed: "aries1")
             let gegner2 = SKTexture(imageNamed: "aries2")
             let animation = SKAction.animate(with: [gegner1, gegner2], timePerFrame: 0.2)
@@ -451,6 +485,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         }
         else if playerLevel == 7{ //Stier - Mai
             gegner.position = CGPoint( x: 1000, y: 1300)
+            gegner.setScale(0.7)
             let gegner1 = SKTexture(imageNamed: "taurus")
             let gegner2 = SKTexture(imageNamed: "taurus2")
             let animation = SKAction.animate(with: [gegner1, gegner2], timePerFrame: 0.2)
@@ -472,8 +507,9 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         }
         else if playerLevel == 8{ // Zwillinge - Juni
             gegner.position = CGPoint( x: 0, y: 1000)
+            gegner.setScale(0.7)
             gegner.wobble()
-            gegner.dance()
+            gegner.gemini()
             
             let wait1 = SKAction.wait(forDuration: 5.0)
             let spawn1 = SKAction.run { self.spawnGeminiWeapon1()}
@@ -487,6 +523,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         }
         else if playerLevel == 9{ // Krebs - Juli
             gegner.position = CGPoint( x: Int.random(in: 500..<1400), y: 1500)
+            gegner.setScale(0.7)
             let gegner2 = SKTexture(imageNamed: "cancer1")
             let gegner1 = SKTexture(imageNamed: "cancer2")
             let animation = SKAction.animate(with: [gegner2, gegner1], timePerFrame: 0.2)
@@ -513,6 +550,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         }
         else if playerLevel == 10{ // Löwe - August
             gegner.position = CGPoint( x: Int(size.width)-100, y: Int(size.height)-100)
+            gegner.setScale(0.7)
             let gegner2 = SKTexture(imageNamed: "lion1")
             let gegner1 = SKTexture(imageNamed: "lion2")
             let animation = SKAction.animate(with: [gegner2, gegner1], timePerFrame: 0.2)
@@ -531,10 +569,20 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
             gegner.wobble()
             gegner.moveAlong()
             
-            let wait2 = SKAction.wait(forDuration: 8.0)
-            let spawn2 = SKAction.run { self.spawnVirgoWeapon1()}
+            let wait1 = SKAction.wait(forDuration: 5.0)
+            let spawn1 = SKAction.run { self.spawnVirgoWeapon1()}
+            let sequence1 = SKAction.sequence([wait1, spawn1])
+            run(SKAction.repeatForever(sequence1))
+            
+            let wait2 = SKAction.wait(forDuration: 6.0)
+            let spawn2 = SKAction.run { self.spawnVirgoWeapon2()}
             let sequence2 = SKAction.sequence([wait2, spawn2])
             run(SKAction.repeatForever(sequence2))
+            
+            let wait3 = SKAction.wait(forDuration: 7.0)
+            let spawn3 = SKAction.run { self.spawnVirgoWeapon3()}
+            let sequence3 = SKAction.sequence([wait3, spawn3])
+            run(SKAction.repeatForever(sequence3))
         }
         else if playerLevel == 12{
             return
@@ -851,9 +899,25 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
     //Waage
     func spawnLibraWeapon1() {
         let gegnerWeapon = Weapon1(type: 0)
-        let arrayWeapon = ["object10W", "object10X"]
-        //SKSpriteNode(imageNamed: arrayWeapon[Int.random(in: 0..<1)])
-        gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
+        gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 600), y: Int(size.height) + 100)
+        gegnerWeapon.setScale(0.8)
+        addChild(gegnerWeapon)
+        
+        gegnerWeapon.wobble()
+        gegnerWeapon.randomCoin()
+    }
+    func spawnLibraWeapon2() {
+        let gegnerWeapon = Weapon2(type: 0)
+        gegnerWeapon.position = CGPoint(x: Int.random(in: 700 ..< 1200), y: Int(size.height) + 100)
+        gegnerWeapon.setScale(0.8)
+        addChild(gegnerWeapon)
+        
+        gegnerWeapon.wobble()
+        gegnerWeapon.randomCoin()
+    }
+    func spawnLibraWeapon3() {
+        let gegnerWeapon = Weapon3(type: 0)
+        gegnerWeapon.position = CGPoint(x: Int.random(in: 1300 ..< 2200), y: Int(size.height) + 100)
         gegnerWeapon.setScale(0.8)
         addChild(gegnerWeapon)
         
@@ -893,10 +957,23 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
     //Schütze
     func spawnSagittariusWeapon1() {
         let gegnerWeapon = Weapon1(type: 2)
-            let arrayWeapon = ["object12W", "object12X", "object12Y"]
-            //SKSpriteNode(imageNamed: arrayWeapon[Int.random(in: 0..<2)])
             gegnerWeapon.position = CGPoint(x: Int.random(in: 1500 ..< 1900), y: Int(size.height) + 20)
+            gegnerWeapon.setScale(0.6)
+            addChild(gegnerWeapon)
             
+            gegnerWeapon.pfeile()
+    }
+    func spawnSagittariusWeapon2() {
+        let gegnerWeapon = Weapon2(type: 2)
+            gegnerWeapon.position = CGPoint(x: Int.random(in: 1500 ..< 1900), y: Int(size.height) + 20)
+            gegnerWeapon.setScale(0.6)
+            addChild(gegnerWeapon)
+            
+            gegnerWeapon.pfeile()
+    }
+    func spawnSagittariusWeapon3() {
+        let gegnerWeapon = Weapon3(type: 2)
+            gegnerWeapon.position = CGPoint(x: Int.random(in: 1500 ..< 1900), y: Int(size.height) + 20)
             gegnerWeapon.setScale(0.6)
             addChild(gegnerWeapon)
             
@@ -937,14 +1014,33 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
     //Wassermann
     func spawnAquariusWeapon1() {
         let gegnerWeapon = Weapon1(type: 4)
-        let xPosition = Int.random(in: 1000 ..< 1600)
+        let xPosition = Int.random(in: 300 ..< 2000)
             gegnerWeapon.position = CGPoint(x: xPosition, y: Int(size.height) + 100)
-           
-            //gegnerWeapon.setScale(0.4)
+            gegnerWeapon.setScale(0.3)
             addChild(gegnerWeapon)
             
-            gegnerWeapon.wobbleSanft()
-            gegnerWeapon.hideLeft()
+            gegnerWeapon.wobble()
+            gegnerWeapon.runterfloaten()
+        }
+    func spawnAquariusWeapon2() {
+        let gegnerWeapon = Weapon2(type: 4)
+        let xPosition = Int.random(in: 300 ..< 2000)
+            gegnerWeapon.position = CGPoint(x: xPosition, y: Int(size.height) + 100)
+            gegnerWeapon.setScale(0.3)
+            addChild(gegnerWeapon)
+            
+            gegnerWeapon.wobble()
+            gegnerWeapon.runterfloaten()
+        }
+    func spawnAquariusWeapon3() {
+        let gegnerWeapon = Weapon3(type: 4)
+        let xPosition = Int.random(in: 300 ..< 2000)
+            gegnerWeapon.position = CGPoint(x: xPosition, y: Int(size.height) + 100)
+            gegnerWeapon.setScale(0.3)
+            addChild(gegnerWeapon)
+            
+            gegnerWeapon.wobble()
+            gegnerWeapon.runterfloaten()
         }
     
     //Fische
@@ -1074,7 +1170,37 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         let animation = SKAction.animate(with: [weapon1, weapon2, weapon3], timePerFrame: 0.2)
         let makeWeapon = SKAction.repeatForever(animation)
         gegnerWeapon.run (makeWeapon)
-        gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
+        gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 500), y: Int(size.height) + 100)
+        gegnerWeapon.setScale(0.3)
+        addChild(gegnerWeapon)
+           
+        gegnerWeapon.wobble()
+        gegnerWeapon.randomCoin()
+        }
+    func spawnVirgoWeapon2() {
+        let gegnerWeapon = Weapon2(type: 11)
+        let weapon3 = SKTexture(imageNamed: "objectCoinBlue")
+        let weapon2 = SKTexture(imageNamed: "objectCoinGreen")
+        let weapon1 = SKTexture(imageNamed: "objectCoinPink")
+        let animation = SKAction.animate(with: [weapon1, weapon2, weapon3], timePerFrame: 0.2)
+        let makeWeapon = SKAction.repeatForever(animation)
+        gegnerWeapon.run (makeWeapon)
+        gegnerWeapon.position = CGPoint(x: Int.random(in: 800 ..< 1000), y: Int(size.height) + 100)
+        gegnerWeapon.setScale(0.3)
+        addChild(gegnerWeapon)
+           
+        gegnerWeapon.wobble()
+        gegnerWeapon.randomCoin()
+        }
+    func spawnVirgoWeapon3() {
+        let gegnerWeapon = Weapon3(type: 11)
+        let weapon3 = SKTexture(imageNamed: "objectCoinBlue")
+        let weapon2 = SKTexture(imageNamed: "objectCoinGreen")
+        let weapon1 = SKTexture(imageNamed: "objectCoinPink")
+        let animation = SKAction.animate(with: [weapon1, weapon2, weapon3], timePerFrame: 0.2)
+        let makeWeapon = SKAction.repeatForever(animation)
+        gegnerWeapon.run (makeWeapon)
+        gegnerWeapon.position = CGPoint(x: Int.random(in: 2000 ..< 2200), y: Int(size.height) + 100)
         gegnerWeapon.setScale(0.3)
         addChild(gegnerWeapon)
            
