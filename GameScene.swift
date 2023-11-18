@@ -18,7 +18,7 @@ class GameScene: SKScene {
     
     let starmap = SKSpriteNode(imageNamed: "discOldSignsNeon")
     let play = SKSpriteNode(imageNamed: "buttonGo")
-    let starmap1 = SKSpriteNode(imageNamed: "discTitle")
+    let starmap1 = SKSpriteNode(imageNamed: "discIntro")
     
     //MENU
     let playButton = SKSpriteNode(imageNamed: "buttonPlay.jpg")
@@ -73,7 +73,7 @@ class GameScene: SKScene {
         let beides = SKAction.sequence([reindrehen, ausblenden])
         starmap.run(beides)
 
-        let einblenden = SKAction.fadeIn(withDuration: 3.0)
+        let einblenden = SKAction.fadeIn(withDuration: 6.0)
         starmap1.setScale(1)
         starmap1.position = CGPoint(x: self.frame.midX, y: self.frame.midY+600)
         starmap1.zPosition = -25
@@ -81,7 +81,7 @@ class GameScene: SKScene {
         addChild(starmap1)
         starmap1.run(einblenden)
         
-        run("sound-intro")
+        run("sound astrowing")
         
         play.name = "Menu"
         play.position = CGPoint(x: self.frame.midX, y: self.frame.minY + 300)
