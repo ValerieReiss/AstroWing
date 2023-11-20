@@ -12,6 +12,10 @@ import UIKit
 //more noises click clack uhr die aufgezogen wird
 
 class MenuScene: SKScene {
+    
+    static var sound = true
+    public let bgSound = SKAudioNode(fileNamed: "astrowing fadeinandout")
+    
     var disc = SKSpriteNode(imageNamed: "discMenu1")
     var zahl = 0
     
@@ -64,6 +68,7 @@ class MenuScene: SKScene {
         //userDefaults.set(wayPoints, forKey: scoreDraw)
         userDefaults.synchronize()
         
+       
         let backgroundImage = SKSpriteNode(imageNamed: "BgMenu")
         backgroundImage.size = CGSize(width: self.frame.width, height: self.frame.height + 500) //CGSize(width: 2048, height: 1536)
         backgroundImage.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 200)
@@ -84,8 +89,8 @@ class MenuScene: SKScene {
         let play = SKSpriteNode(imageNamed: "buttonPlay.jpg")
         play.name = "play"
         play.zPosition = 5
-        play.position = CGPoint(x: self.frame.midX + 1050, y: self.frame.midY - 267)
-        play.setScale(0.65)
+        play.position = CGPoint(x: self.frame.midX + 1070, y: self.frame.midY - 267)
+        play.setScale(0.50)
         self.addChild(play)
         let drehlinks = SKAction.rotate(byAngle: -0.3, duration: 0.05)
         let drehrechts = SKAction.rotate(byAngle: 0.3, duration: 1.0)
@@ -156,6 +161,20 @@ class MenuScene: SKScene {
         let turn = SKAction.sequence([rechts, links, warte])
         draw.run(SKAction.repeatForever(turn))
         
+        let music = SKSpriteNode(imageNamed: "buttonPlay.jpg")
+        music.name = "music"
+        music.zPosition = 5
+        music.position = CGPoint(x: self.frame.maxX-100, y: self.frame.maxY-100)
+        music.setScale(0.2)
+        self.addChild(music)
+        let linkss = SKAction.rotate(byAngle: 0.3, duration: 0.05)
+        let rechtss = SKAction.rotate(byAngle: -0.3, duration: 1.0)
+        let wartes = SKAction.wait(forDuration: 4.0)
+        let turns = SKAction.sequence([rechtss, linkss, wartes])
+        music.run(SKAction.repeatForever(turns))
+        
+        beginBGMusic(file: bgSound)
+        
         spawnDisc()
         
         let invisible = SKShapeNode(rectOf: CGSize(width: 800, height: 200))
@@ -213,6 +232,10 @@ class MenuScene: SKScene {
             let location = touch.location(in: self)
             let node = atPoint(location)
             
+            if node.name == "music" {
+                //stop()
+            }
+        
             if node.name == "play" {
                 run("sound-button")
                 if zahl == 0 {
@@ -384,6 +407,31 @@ class MenuScene: SKScene {
     
   
     func run(_ fileName: String){
-               run(SKAction.playSoundFileNamed(fileName, waitForCompletion: true))
+               run(SKAction.playSoundFileNamed(fileName, waitForCompletion: false))
        }
+    /*
+    class func playSoundFileNamed(
+        _ soundFile: String,
+        waitForCompletion wait: Bool
+    ) -> SKAction
+    */
+    
+   /*
+    func stop(){
+        SKAction.playSoundFileNamed()
+    }
+    class func stop() -> SKAction*/
+    
+    
+    
+    func beginBGMusic(file: SKAudioNode) {
+        file.autoplayLooped = true
+                if MenuScene.sound == true {
+                    scene?.addChild(file)
+           } else {
+               scene?.removeFromParent()
+           }
+       }
+    
+    
 }

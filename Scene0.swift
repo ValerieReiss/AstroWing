@@ -69,14 +69,14 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
     var battery3 = SKSpriteNode(imageNamed: "naviBattery3")
     var battery4 = SKSpriteNode(imageNamed: "naviBattery4")
     var battery5 = SKSpriteNode(imageNamed: "naviBattery5")
-    var playerHearts = 2000
+    var playerHearts = 1000
     var batteryG0 = SKSpriteNode(imageNamed: "naviBatteryG0")
     var batteryG1 = SKSpriteNode(imageNamed: "naviBatteryG1")
     var batteryG2 = SKSpriteNode(imageNamed: "naviBatteryG2")
     var batteryG3 = SKSpriteNode(imageNamed: "naviBatteryG3")
     var batteryG4 = SKSpriteNode(imageNamed: "naviBatteryG4")
     var batteryG5 = SKSpriteNode(imageNamed: "naviBatteryG5")
-    var gegnerHearts = 2000
+    var gegnerHearts = 1000
     
     var zahl = 0
     
@@ -120,12 +120,13 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         backgroundImage.zPosition = 3
         backgroundImage.isUserInteractionEnabled = false
         addChild(backgroundImage)
-        let menu = SKSpriteNode(imageNamed: "buttonLittle.jpg")
+        
+        /*let menu = SKSpriteNode(imageNamed: "buttonLittle.jpg")
         menu.name = "Menu"
         menu.zPosition = 5
         menu.position = CGPoint(x: self.frame.midX-600, y: self.frame.minY + 180)
         menu.setScale(0.3)
-        self.addChild(menu)
+        self.addChild(menu)*/
         
         //navibar:
         let coins = SKSpriteNode(imageNamed: "objectCoin.jpg")
@@ -319,7 +320,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
         let action = SKAction.setTexture(SKTexture(imageNamed: arrayFusil[playerFusil]), resize: true)
         self.player.run(action)
         
-        player.position = CGPoint(x: 1000, y: 400)
+        player.position = CGPoint(x: 1300, y: 400)
         addChild(player)
         
 // music        run("astrowing bg2")
@@ -450,12 +451,13 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
             gegner.position = CGPoint( x: Int.random(in: 200 ..< 2400), y: Int(size.height))
             gegner.setScale(0.7)
             gegner.rotateFull()
-            gegner.moveToPlayer()
+            gegner.pisces()
+            //gegner.moveToPlayer()
             
-            let wait2 = SKAction.wait(forDuration: 8.0)
-            let spawn2 = SKAction.run { self.spawnPiscesWeapon1()}
-            let sequence2 = SKAction.sequence([wait2, spawn2])
-            run(SKAction.repeatForever(sequence2))
+            let wait1 = SKAction.wait(forDuration: 8.0)
+            let spawn1 = SKAction.run { self.spawnPiscesWeapon1()}
+            let sequence1 = SKAction.sequence([wait1, spawn1])
+            run(SKAction.repeatForever(sequence1))
         }
         else if playerLevel == 6{ //Widder - April
             gegner.position = CGPoint( x: 1400, y: 1200)
@@ -665,11 +667,12 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
                     } else {return}
                     zahl -= 1
                 }
-            } else if (node.name == "Menu") {
+            } 
+            /*else if (node.name == "Menu") {
                 self.view?.presentScene(MenuScene(size: self.size),
                                         transition: .crossFade(withDuration: 2))
                 run("sound-button")
-            }
+            }*/
         }
     }
     
@@ -697,13 +700,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
             run("sound-bomb")
             playerHearts -= 1
             gegnerHearts -= 1
-            if contact.bodyA.node?.name == "gegner"{
-                let bla = SKAction.moveTo(y: -500, duration: 0.02)
-                contact.bodyA.node?.run(bla)
-                }
-            else {
-                let bla = SKAction.moveTo(y: -500, duration: 0.05)
-                contact.bodyB.node?.run(bla)}
+            
             if playerHearts <= 0 {
                 let fadein = SKAction.fadeAlpha(to: 1.0, duration: 3.0)
                 let fadeout = SKAction.fadeAlpha(to: 0.0, duration: 3.0)
@@ -722,7 +719,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
                    explosion.position = contact.bodyA.node?.position ?? CGPoint(x: 0, y: 0)}
                else {explosion.position = contact.bodyB.node?.position ?? CGPoint(x: 0, y: 0)}
                 addChild(explosion)}
-           gegnerHearts -= 1
+           gegnerHearts -= 5
            if gegnerHearts <= 0 {
                 run("sound-GegnerDead")
                 if contact.bodyA.node?.name == "gegner"{ contact.bodyA.node?.removeFromParent()}
@@ -739,7 +736,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
                     explosion.position = contact.bodyA.node!.position
                     addChild(explosion)}
             run("sound-bomb")
-            playerHearts -= 50
+            playerHearts -= 10
             if contact.bodyA.node?.name == "gegnerWeapon"{ contact.bodyA.node?.removeFromParent()}
             else {contact.bodyB.node?.removeFromParent()}
             if playerHearts <= 0 {
@@ -757,7 +754,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
                     explosion.position = contact.bodyA.node!.position
                     addChild(explosion)}
             run("sound-bomb")
-            playerHearts -= 50
+            playerHearts -= 10
             if contact.bodyA.node?.name == "gegnerWeapon"{ contact.bodyA.node?.removeFromParent()}
             else {contact.bodyB.node?.removeFromParent()}
             if playerHearts <= 0 {
@@ -775,7 +772,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
                     explosion.position = contact.bodyA.node!.position
                     addChild(explosion)}
             run("sound-bomb")
-            playerHearts -= 50
+            playerHearts -= 10
             if contact.bodyA.node?.name == "gegnerWeapon"{ contact.bodyA.node?.removeFromParent()}
             else {contact.bodyB.node?.removeFromParent()}
             if playerHearts <= 0 {
@@ -793,7 +790,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
                     explosion.position = laserBeam.position
                     addChild(explosion)}
                 run("sound-bomb")
-                gegnerHearts -= 1
+                gegnerHearts -= 10
                 if gegnerHearts <= 0 {
                     run("sound-GegnerDead")
                     if contact.bodyA.node?.name == "gegner"{ contact.bodyA.node?.removeFromParent()}
@@ -812,7 +809,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
                     explosion.position = laserBeam.position
                     addChild(explosion)}
                 run("sound-bomb")
-                gegnerHearts -= 1
+                gegnerHearts -= 10
                 if gegnerHearts <= 0 {
                     run("sound-GegnerDead")
                     if contact.bodyA.node?.name == "gegner"{ contact.bodyA.node?.removeFromParent()}
@@ -831,7 +828,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
                     explosion.position = laserBeam.position
                     addChild(explosion)}
                 run("sound-bomb")
-                gegnerHearts -= 1
+                gegnerHearts -= 10
                 if gegnerHearts <= 0 {
                     run("sound-GegnerDead")
                     if contact.bodyA.node?.name == "gegner"{ contact.bodyA.node?.removeFromParent()}
@@ -1047,8 +1044,7 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
     func spawnPiscesWeapon1() {
         let gegnerWeapon = Weapon1(type: 5)
             gegnerWeapon.position = CGPoint(x: Int.random(in: 400 ..< 2200), y: Int(size.height) + 100)
-           
-            //gegnerWeapon.setScale(0.5)
+            gegnerWeapon.setScale(0.5)
             addChild(gegnerWeapon)
             
             gegnerWeapon.rotateFull()
@@ -1283,19 +1279,19 @@ class Scene0: SKScene, SKPhysicsContactDelegate {
        
     }
     func checkHearts(){
-        if playerHearts <= 2000 { battery0.alpha = 1.0} else {battery0.alpha = 0.0}
-        if playerHearts <= 1600 { battery1.alpha = 1.0} else {battery1.alpha = 0.0}
-        if playerHearts <= 1200 { battery2.alpha = 1.0} else {battery2.alpha = 0.0}
-        if playerHearts <= 800 { battery3.alpha = 1.0} else {battery3.alpha = 0.0}
-        if playerHearts <= 400 { battery4.alpha = 1.0} else {battery4.alpha = 0.0}
+        if playerHearts <= 1000 { battery0.alpha = 1.0} else {battery0.alpha = 0.0}
+        if playerHearts <= 800 { battery1.alpha = 1.0} else {battery1.alpha = 0.0}
+        if playerHearts <= 600 { battery2.alpha = 1.0} else {battery2.alpha = 0.0}
+        if playerHearts <= 400 { battery3.alpha = 1.0} else {battery3.alpha = 0.0}
+        if playerHearts <= 200 { battery4.alpha = 1.0} else {battery4.alpha = 0.0}
         if playerHearts <= 0 { battery5.alpha = 1.0} else {battery5.alpha = 0.0}
     }
     func checkGegnerHearts(){
-        if gegnerHearts <= 2000 { batteryG0.alpha = 1.0} else {batteryG0.alpha = 0.0}
-        if gegnerHearts <= 1600 { batteryG1.alpha = 1.0} else {batteryG1.alpha = 0.0}
-        if gegnerHearts <= 1200 { batteryG2.alpha = 1.0} else {batteryG2.alpha = 0.0}
-        if gegnerHearts <= 800 { batteryG3.alpha = 1.0} else {batteryG3.alpha = 0.0}
-        if gegnerHearts <= 400 { batteryG4.alpha = 1.0} else {batteryG4.alpha = 0.0}
+        if gegnerHearts <= 1000 { batteryG0.alpha = 1.0} else {batteryG0.alpha = 0.0}
+        if gegnerHearts <= 800 { batteryG1.alpha = 1.0} else {batteryG1.alpha = 0.0}
+        if gegnerHearts <= 600 { batteryG2.alpha = 1.0} else {batteryG2.alpha = 0.0}
+        if gegnerHearts <= 400 { batteryG3.alpha = 1.0} else {batteryG3.alpha = 0.0}
+        if gegnerHearts <= 200 { batteryG4.alpha = 1.0} else {batteryG4.alpha = 0.0}
         if gegnerHearts <= 0 { batteryG5.alpha = 1.0} else {batteryG5.alpha = 0.0}
     }
     override func update(_ currentTime: TimeInterval) {

@@ -174,6 +174,22 @@ class Gegner: SKSpriteNode{
         run(SKAction.repeatForever(sequence))
     }
     
+    func pisces(){
+        let links = SKAction.move(to: CGPoint(x: 500, y: CGFloat.random(in: 900 ..< 1100)), duration: 1.0)
+        links.timingFunction = {time in return simd_smoothstep(0, 1, time) }
+        let down = SKAction.move(to: CGPoint(x: 900, y: CGFloat.random(in: 700 ..< 800)), duration: 1.0)
+        down.timingFunction = {time in return simd_smoothstep(0, 1, time) }
+        let hoch = SKAction.move(to: CGPoint(x: 1400, y: CGFloat.random(in: 900 ..< 1200)), duration: 1.0)
+        hoch.timingFunction = {time in return simd_smoothstep(0, 1, time) }
+        let rechtsunten = SKAction.move(to: CGPoint(x: 1700, y: CGFloat.random(in: 650 ..< 750)), duration: 1.0)
+        rechtsunten.timingFunction = {time in return simd_smoothstep(0, 1, time) }
+        let up = SKAction.move(to: CGPoint(x: 2000, y: CGFloat.random(in: 1000 ..< 1200)), duration: 1.0)
+        up.timingFunction = {time in return simd_smoothstep(0, 1, time) }
+        
+        let sequence = SKAction.sequence([links, rechtsunten, down, hoch,  up,  hoch, down ])
+        run(SKAction.repeatForever(sequence))
+    }
+    
     func gemini() {
         let links = SKAction.move(to: CGPoint(x: 500, y: CGFloat.random(in: 900 ..< 1100)), duration: 1.0)
         links.timingFunction = {time in return simd_smoothstep(0, 1, time) }

@@ -34,11 +34,11 @@ class DrawScene: SKScene {
         userDefaults.synchronize()
        
         labelPlay = SKLabelNode(fontNamed: "Chalkduster")
-        labelPlay.fontSize = 100
+        labelPlay.fontSize = 60
         labelPlay.zPosition = 10
         labelPlay.color = .white
-        labelPlay.position = CGPoint(x: self.frame.minX + 500, y: self.frame.maxY - 150)
-        labelPlay.text = "made by Valerie"
+        labelPlay.position = CGPoint(x: self.frame.minX + 300, y: self.frame.maxY - 150)
+        labelPlay.text = "Draw something"
         addChild(labelPlay)
       
         if let farEmitter = SKEmitterNode(fileNamed: "StarfieldFar.sks"){
@@ -127,8 +127,8 @@ class DrawScene: SKScene {
         let menu = SKSpriteNode(imageNamed: "buttonLittle.jpg")
         menu.name = "Menu"
         menu.zPosition = 5
-        menu.position = CGPoint(x: self.frame.midX-900, y: self.frame.midY-500)
-        menu.setScale(0.4)
+        menu.position = CGPoint(x: self.frame.minX + 240, y: self.frame.minY + 240)
+        menu.setScale(0.3)
         self.addChild(menu)
        
         createPath()

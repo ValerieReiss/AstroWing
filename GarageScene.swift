@@ -16,6 +16,9 @@ class GarageScene: SKScene {
     
     //private var magicStick : SKEmitterNode?
     
+    static var sound = true
+    public let bgSound = SKAudioNode(fileNamed: "astrowing fadeinandout")
+    
     var scoreCoins: SKLabelNode!
     var playerCoins = 0
     var priceCoins: SKLabelNode!
@@ -64,6 +67,8 @@ class GarageScene: SKScene {
         
         userDefaults.synchronize()
        
+        beginBGMusic(file: bgSound)
+        
         if let nearEmitter = SKEmitterNode(fileNamed: "Starfield.sks"){
             nearEmitter.position = CGPoint(x: frame.width / 2, y: frame.height * 1.75)
             nearEmitter.zPosition = -4
@@ -690,4 +695,13 @@ class GarageScene: SKScene {
             zange.position.y = topRight.y
         }
     }
+    
+    func beginBGMusic(file: SKAudioNode) {
+        file.autoplayLooped = true
+                if GarageScene.sound == true {
+                    scene?.addChild(file)
+           } else {
+               scene?.removeFromParent()
+           }
+       }
 }

@@ -58,7 +58,7 @@ class GameScene: SKScene {
         }
         
         let backgroundImage = SKSpriteNode(imageNamed: "BgMenu")
-        backgroundImage.size = CGSize(width: 2048, height: 1536)
+        backgroundImage.size = CGSize(width: self.frame.width, height: self.frame.height + 500)//CGSize(width: 2048, height: 1536)
         backgroundImage.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 130)
         backgroundImage.zPosition = -20
         addChild(backgroundImage)
@@ -73,7 +73,7 @@ class GameScene: SKScene {
         let beides = SKAction.sequence([reindrehen, ausblenden])
         starmap.run(beides)
 
-        let einblenden = SKAction.fadeIn(withDuration: 6.0)
+        let einblenden = SKAction.fadeIn(withDuration: 5.5)
         starmap1.setScale(1)
         starmap1.position = CGPoint(x: self.frame.midX, y: self.frame.midY+600)
         starmap1.zPosition = -25
@@ -81,13 +81,18 @@ class GameScene: SKScene {
         addChild(starmap1)
         starmap1.run(einblenden)
         
-        run("sound astrowing")
+        run("intro-astrowing")
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 7.0) {
+            self.view?.presentScene(MenuScene(size: self.size),
+                                    transition: .crossFade(withDuration: 0.2))
+        }
+        /*
         play.name = "Menu"
         play.position = CGPoint(x: self.frame.midX, y: self.frame.minY + 300)
         play.setScale(1.2)
         addChild(play)
-        play.run(einblenden)
+        play.run(einblenden)*/
 
     }
     
@@ -102,7 +107,7 @@ class GameScene: SKScene {
         let node = self.atPoint(location)
     
        
-        if node.name == "Menu" {
+        /*if node.name == "Menu" {
                 /* if let scene = SKScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
@@ -115,7 +120,7 @@ class GameScene: SKScene {
                 //MenuScene.scaleMode = .aspectFill
                 run("sound-button")
         }
-        
+        */
         
         if let n = self.magicStick?.copy() as! SKEmitterNode? {
                    n.position = location
