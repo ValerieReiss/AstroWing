@@ -695,7 +695,7 @@ class GarageScene: SKScene {
             zange.position.y = topRight.y
         }
     }
-    
+  
     func beginBGMusic(file: SKAudioNode) {
         file.autoplayLooped = true
                 if GarageScene.sound == true {

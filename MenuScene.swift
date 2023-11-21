@@ -409,20 +409,27 @@ class MenuScene: SKScene {
     func run(_ fileName: String){
                run(SKAction.playSoundFileNamed(fileName, waitForCompletion: false))
        }
+ 
+    
     /*
-    class func playSoundFileNamed(
-        _ soundFile: String,
-        waitForCompletion wait: Bool
-    ) -> SKAction
+    func switchSound() {
+            if GarageScene.sound == true {
+                GarageScene.sound = false
+            } else {
+                GarageScene.sound = true
+            }
+        }
+    
+    func switchBGMusic(file: SKAudioNode) {
+        if GarageScene.sound == false {
+                file.run(SKAction.stop())
+            } else if file.inParentHierarchy(scene!) == false {
+                scene?.addChild(file)
+            } else {
+                file.run(SKAction.play())
+            }
+        }
     */
-    
-   /*
-    func stop(){
-        SKAction.playSoundFileNamed()
-    }
-    class func stop() -> SKAction*/
-    
-    
     
     func beginBGMusic(file: SKAudioNode) {
         file.autoplayLooped = true

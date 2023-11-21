@@ -175,19 +175,31 @@ class Gegner: SKSpriteNode{
     }
     
     func pisces(){
-        let links = SKAction.move(to: CGPoint(x: 500, y: CGFloat.random(in: 900 ..< 1100)), duration: 1.0)
-        links.timingFunction = {time in return simd_smoothstep(0, 1, time) }
-        let down = SKAction.move(to: CGPoint(x: 900, y: CGFloat.random(in: 700 ..< 800)), duration: 1.0)
-        down.timingFunction = {time in return simd_smoothstep(0, 1, time) }
-        let hoch = SKAction.move(to: CGPoint(x: 1400, y: CGFloat.random(in: 900 ..< 1200)), duration: 1.0)
-        hoch.timingFunction = {time in return simd_smoothstep(0, 1, time) }
-        let rechtsunten = SKAction.move(to: CGPoint(x: 1700, y: CGFloat.random(in: 650 ..< 750)), duration: 1.0)
-        rechtsunten.timingFunction = {time in return simd_smoothstep(0, 1, time) }
-        let up = SKAction.move(to: CGPoint(x: 2000, y: CGFloat.random(in: 1000 ..< 1200)), duration: 1.0)
-        up.timingFunction = {time in return simd_smoothstep(0, 1, time) }
         
-        let sequence = SKAction.sequence([links, rechtsunten, down, hoch,  up,  hoch, down ])
+        let a = SKAction.move(to: CGPoint(x: 700, y: 1100), duration: 1.5)
+        let b = SKAction.move(to: CGPoint(x: 1200, y: 1200), duration: 1.0)
+        let c = SKAction.move(to: CGPoint(x: 1700, y: 1100), duration: 1.5)
+        let d = SKAction.move(to: CGPoint(x: 1700, y: 700), duration: 1.0)
+        let e = SKAction.move(to: CGPoint(x: 1200, y: 600), duration: 1.0)
+        let f = SKAction.move(to: CGPoint(x: 700, y: 700), duration: 1.0)
+        
+        let sequence = SKAction.sequence([a, b, c, d, e, f])
         run(SKAction.repeatForever(sequence))
+        
+      
+        /*
+        let rect = CGRect(x: 0, y: 0, width: 300, height: 300)//(x: 1000, y: 400, width: 0, height: 0)
+        
+        let movein = SKAction.move(to: CGPoint(x: 1300, y: 900), duration: 2.0)
+        let moveout = SKAction.move(to: CGPoint(x: 1300, y: 1100), duration: 2.0)
+        
+        let roundedRect = UIBezierPath(roundedRect: rect, cornerRadius: 50)
+        let path = UIBezierPath(ovalIn: rect)
+        let movement = SKAction.follow(path.cgPath, asOffset: true, orientToPath: true, speed: 0.2)
+       
+        let sequence = SKAction.sequence([movein, movement, moveout])
+        run(SKAction.repeatForever(sequence))
+        */
     }
     
     func gemini() {
@@ -235,7 +247,7 @@ class Gegner: SKSpriteNode{
     }
     
     func hide(){
-        let hide = SKAction.moveTo(y: 1500, duration: 6.0)
+        let hide = SKAction.moveTo(y: 1500, duration: 2.0)
         run(SKAction.repeatForever(hide))
     }
 }
